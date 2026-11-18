@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>國二上理化段考刷題神器｜全220題互動題庫</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #f1f5f9;
+      --bg-card: #ffffff;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --accent: #0ea5e9;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+      --warning: #d97706;
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 48px;
+    }
+
+    /* Header */
+    .app-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .header-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      color: #93c5fd;
+      margin: 0;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-btn {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .badge-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .badge-count {
+      background: #ef4444;
+      color: white;
+      font-size: 0.72rem;
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-weight: 800;
+    }
+
+    .badge-count.zero {
+      background: #10b981;
+    }
+
+    /* Container */
+    .container {
+      max-width: 820px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    /* Card */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 22px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Setup Dashboard */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stat-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .stat-num.wrong {
+      color: var(--danger);
+    }
+
+    .stat-num.done {
+      color: var(--success);
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      margin-top: 2px;
+      font-weight: 600;
+    }
+
+    /* Mode Selector */
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .mode-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mode-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #ffffff;
+      position: relative;
+    }
+
+    .mode-card:hover {
+      border-color: #93c5fd;
+    }
+
+    .mode-card.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .mode-card-title {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mode-card-desc {
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      line-height: 1.4;
+    }
+
+    /* Chapter Pills */
+    .chapter-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mini-link {
+      font-size: 0.8rem;
+      color: var(--primary);
+      background: none;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+
+    .mini-link:hover {
+      background: var(--primary-light);
+    }
+
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .chap-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      background: #fff;
+      transition: all 0.15s;
+      user-select: none;
+    }
+
+    .chap-pill.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .chap-count {
+      font-size: 0.75rem;
+      background: rgba(15, 23, 42, 0.06);
+      padding: 2px 7px;
+      border-radius: 999px;
+      color: var(--text-sub);
+    }
+
+    .chap-pill.selected .chap-count {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Filter Row */
+    .filter-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 520px) {
+      .filter-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .filter-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+
+    .seg-group {
+      display: flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 10px;
+      gap: 4px;
+    }
+
+    .seg-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 8px 6px;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .seg-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Primary Button */
+    .btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #ffffff;
+      border: none;
+      padding: 15px 20px;
+      border-radius: var(--radius-md);
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+      transition: transform 0.1s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.99);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1.5px solid var(--border);
+      padding: 11px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-secondary:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    /* Quiz View */
+    .quiz-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .progress-wrap {
+      flex: 1;
+      background: #e2e8f0;
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-sub);
+      white-space: nowrap;
+    }
+
+    .timer-pill {
+      background: #fef3c7;
+      color: #b45309;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .q-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .tag-chap {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .tag-level-basic {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .tag-level-mid {
+      background: #ffedd5;
+      color: #c2410c;
+    }
+
+    .tag-id {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    .q-text {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    /* Options */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #f8fafc;
+    }
+
+    .opt-key {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      color: var(--text-sub);
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .opt-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .opt-btn.selected .opt-key {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .opt-btn.correct {
+      border-color: var(--success) !important;
+      background: var(--success-bg) !important;
+    }
+
+    .opt-btn.correct .opt-key {
+      background: var(--success) !important;
+      color: #ffffff !important;
+    }
+
+    .opt-btn.wrong {
+      border-color: var(--danger) !important;
+      background: var(--danger-bg) !important;
+    }
+
+    .opt-btn.wrong .opt-key {
+      background: var(--danger) !important;
+      color: #ffffff !important;
+    }
+
+    /* Explanation Box */
+    .exp-box {
+      margin-top: 20px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .exp-header {
+      padding: 12px 16px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .exp-header.is-correct {
+      background: var(--success-bg);
+      color: #065f46;
+      border-bottom: 1px solid var(--success-border);
+    }
+
+    .exp-header.is-wrong {
+      background: var(--danger-bg);
+      color: #991b1b;
+      border-bottom: 1px solid var(--danger-border);
+    }
+
+    .exp-body {
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .concept-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+      padding: 5px 11px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .exp-detail {
+      font-size: 0.95rem;
+      color: #1e293b;
+      margin-bottom: 12px;
+      line-height: 1.65;
+    }
+
+    .pitfall-box {
+      background: var(--warning-bg);
+      border-left: 4px solid var(--warning);
+      border-top: 1px solid var(--warning-border);
+      border-right: 1px solid var(--warning-border);
+      border-bottom: 1px solid var(--warning-border);
+      padding: 12px 14px;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.92rem;
+      color: #78350f;
+      line-height: 1.6;
+    }
+
+    .pitfall-title {
+      font-weight: 800;
+      color: #b45309;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .quiz-nav button {
+      flex: 1;
+    }
+
+    /* Result Summary */
+    .score-hero {
+      text-align: center;
+      padding: 24px 16px;
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+      border: 1px solid #dbeafe;
+    }
+
+    .score-big {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .score-sub {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .chap-breakdown-item {
+      margin-bottom: 12px;
+    }
+
+    .chap-bd-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .chap-bd-bar {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .chap-bd-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    .review-item {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+
+    .review-item.wrong-card {
+      border-color: var(--danger-border);
+      background: #fffafa;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand" onclick="goHome()" style="cursor:pointer;">
+        <div class="brand-icon">🔬</div>
+        <div>
+          <h1 class="brand-title">國二上理化段考刷題神器</h1>
+          <p class="brand-sub">波與聲音 · 光與顏色｜完整 220 題庫</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="badge-btn" onclick="startWrongBook()" title="練習歷史錯題">
+          📕 錯題本 <span id="headerWrongCount" class="badge-count zero">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- VIEW 1: SETUP DASHBOARD -->
+    <section id="setupView">
+      <div class="card">
+        <div class="stats-bar">
+          <div class="stat-box">
+            <div class="stat-num" id="statTotal">220</div>
+            <div class="stat-label">題庫總題數</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num done" id="statMastered">0</div>
+            <div class="stat-label">已答對題數</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num wrong" id="statWrong">0</div>
+            <div class="stat-label">待消滅錯題</div>
+          </div>
+        </div>
+
+        <h2 class="section-title">1. 選擇練習模式</h2>
+        <div class="mode-grid">
+          <div class="mode-card active" data-mode="practice" onclick="selectMode('practice')">
+            <div class="mode-card-title">⚡ 自由刷題模式</div>
+            <div class="mode-card-desc">選完答案<strong>立即判題</strong>，馬上顯示核心考點與避坑提醒，適合平常複習。</div>
+          </div>
+          <div class="mode-card" data-mode="exam" onclick="selectMode('exam')">
+            <div class="mode-card-title">⏱️ 段考模擬測驗</div>
+            <div class="mode-card-desc">開啟計時器，全部作答完畢後統一交卷算分與章節弱點分析。</div>
+          </div>
+          <div class="mode-card" data-mode="wrong" onclick="selectMode('wrong')">
+            <div class="mode-card-title">📕 專屬錯題特訓</div>
+            <div class="mode-card-desc">針對過去答錯的題目反覆重練，<strong>答對後自動移出</strong>錯題庫。</div>
+          </div>
+        </div>
+
+        <div id="normalFilters">
+          <div class="chapter-actions">
+            <h2 class="section-title" style="margin:0;">2. 選擇複習章節（可複選）</h2>
+            <div>
+              <button class="mini-link" onclick="toggleAllChapters(true)">全選 (9章)</button>
+              <button class="mini-link" onclick="selectCh3()">只選第3章(波與音)</button>
+              <button class="mini-link" onclick="selectCh4()">只選第4章(光與色)</button>
+              <button class="mini-link" onclick="toggleAllChapters(false)">清空</button>
+            </div>
+          </div>
+          <div class="chapter-grid" id="chapterGrid"></div>
+
+          <h2 class="section-title">3. 難度與題數設定</h2>
+          <div class="filter-row">
+            <div class="filter-group">
+              <label>難易度篩選</label>
+              <div class="seg-group" id="levelGroup">
+                <button class="seg-btn active" data-val="ALL" onclick="setSeg('level', 'ALL', this)">全部混合</button>
+                <button class="seg-btn" data-val="基礎" onclick="setSeg('level', '基礎', this)">基礎觀念</button>
+                <button class="seg-btn" data-val="中等" onclick="setSeg('level', '中等', this)">中等進階</button>
+              </div>
+            </div>
+            <div class="filter-group">
+              <label>本次出題數（隨機抽題）</label>
+              <div class="seg-group" id="countGroup">
+                <button class="seg-btn" data-val="10" onclick="setSeg('count', 10, this)">10 題</button>
+                <button class="seg-btn active" data-val="25" onclick="setSeg('count', 25, this)">25 題</button>
+                <button class="seg-btn" data-val="40" onclick="setSeg('count', 40, this)">40 題</button>
+                <button class="seg-btn" data-val="999" onclick="setSeg('count', 999, this)">全部</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" onclick="startQuiz()">
+          🚀 開始測驗（符合條件：<span id="matchedCount">220</span> 題）
+        </button>
+
+        <div style="text-align:right; margin-top:12px;">
+          <button class="mini-link" style="color:#94a3b8;" onclick="resetProgress()">重置學習紀錄</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: QUIZ INTERFACE -->
+    <section id="quizView" class="hidden">
+      <div class="quiz-topbar">
+        <button class="btn-secondary" style="padding:6px 12px; font-size:0.82rem;" onclick="confirmExit()">← 返回選單</button>
+        <div class="progress-wrap">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">1 / 25</div>
+        <div class="timer-pill hidden" id="timerPill">00:00</div>
+      </div>
+
+      <div class="card">
+        <div class="q-meta">
+          <span class="tag tag-chap" id="qChapter">3-1 波的傳遞與特徵</span>
+          <span class="tag tag-level-basic" id="qLevel">基礎</span>
+          <span class="tag tag-id" id="qId">題號 #1</span>
+        </div>
+
+        <div class="q-text" id="qText">題目載入中...</div>
+
+        <div class="options-list" id="optionsList"></div>
+
+        <!-- Immediate Feedback Box (Practice & Wrong Mode) -->
+        <div class="exp-box hidden" id="expBox">
+          <div class="exp-header" id="expHeader"></div>
+          <div class="exp-body">
+            <div class="concept-chip">🎯 核心考點：<span id="expConcept"></span></div>
+            <div class="exp-detail" id="expDetail"></div>
+            <div class="pitfall-box" id="pitfallBox">
+              <span class="pitfall-title">⚠️ 段考避坑提醒</span>
+              <span id="expPitfall"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-nav">
+          <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()">上一題</button>
+          <button class="btn-primary" id="nextBtn" onclick="nextQuestion()">下一題 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: RESULT & DIAGNOSTICS -->
+    <section id="resultView" class="hidden">
+      <div class="card">
+        <div class="score-hero">
+          <div class="score-big" id="resScore">100 分</div>
+          <div class="score-sub" id="resSummary">共 25 題，答對 25 題｜耗時 03:12</div>
+        </div>
+
+        <h2 class="section-title">📊 各章節答對率診斷</h2>
+        <div id="chapBreakdown" style="margin-bottom: 22px;"></div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+          <button class="btn-primary" style="flex:1;" onclick="goHome()">🏠 回到主選單繼續練習</button>
+          <button class="btn-secondary" id="retryWrongBtn" style="flex:1;" onclick="startWrongBook()">📕 立刻重練錯題</button>
+        </div>
+
+        <h2 class="section-title">📝 本次作答逐題檢討</h2>
+        <div id="reviewList"></div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      國二上理化段考複習系統｜支援手機、平板、電腦離線快取與自動錯題記錄
+    </div>
+  </main>
+
+  <script>
+    // Full 220 Questions Dataset
+    const ALL_QUESTIONS = [{"id": 1, "chapter": "3-1 波的傳遞與特徵", "question": "在平靜的水面上投下一枚石子，水面會產生一圈圈向外擴散的漣漪。若水面上有一片落葉，當水波通過時，落葉的運動情形為何？", "options": {"A": "在原來的位置附近上下振動", "B": "隨水波一起向池邊漂去", "C": "沉入水底後再浮起", "D": "沿著水波做圓周運動前進"}, "answer": "A", "level": "基礎", "concept": "波傳遞能量而不傳遞介質", "explanation": "【解析】水波傳播時，傳遞的是能量，而作為介質的水（以及漂浮在水上的落葉）只會在原處附近上下振動，不會隨波前進。【避坑提醒】學生常直覺認為波會把水和落葉一起推向遠處，應牢記「介質只在原地振動，不隨波前進」。"}, {"id": 2, "chapter": "3-1 波的傳遞與特徵", "question": "下列關於「橫波（高低波）」與「縱波（疏密波）」的分類依據，何者正確？", "options": {"A": "依波的能量大小來分類", "B": "依介質振動方向與波前進方向的關係來分類", "C": "依波的傳播速率快慢來分類", "D": "依介質種類是固體、液體或氣體來分類"}, "answer": "B", "level": "基礎", "concept": "橫波與縱波的定義", "explanation": "【解析】介質振動方向與波前進方向「垂直」者稱為橫波（高低波）；介質振動方向與波前進方向「平行」者稱為縱波（疏密波）。【避坑提醒】分類的標準純粹是看「振動方向與前進方向的幾何關係」，而非介質狀態或波速。"}, {"id": 3, "chapter": "3-1 波的傳遞與特徵", "question": "小華拿一條長繩，上下規律甩動產生連續繩波。若小華在繩上的某一點綁上一條紅色絲帶，當繩波向右傳播時，紅絲帶的振動方向為何？", "options": {"A": "向右移動", "B": "向左移動", "C": "上下垂直振動", "D": "向右上方斜向移動"}, "answer": "C", "level": "基礎", "concept": "繩波為橫波的運動特徵", "explanation": "【解析】繩波屬於橫波，波向右前進，繩上各點（介質）只會在原地上下垂直振動，不會隨波向右移動。【避坑提醒】題目問的是「繩上某一點」或「綁在繩上的絲帶」，千萬不要選向右移動。"}, {"id": 4, "chapter": "3-1 波的傳遞與特徵", "question": "關於波動名詞的定義，下列敘述何者正確？", "options": {"A": "相鄰兩個波峰與波谷間的水平距離稱為一個波長", "B": "平衡位置到波峰的垂直距離稱為波長", "C": "一個完整波動包含三個波峰與三個波谷", "D": "平衡位置到波谷的垂直距離稱為振幅"}, "answer": "D", "level": "基礎", "concept": "振幅與波長的名詞定義", "explanation": "【解析】振幅是介質自平衡位置到波峰（或波谷）的最大垂直位移距離，代表能量大小；相鄰兩個波峰（或相鄰兩個波谷）之間的水平距離才稱為波長。【避坑提醒】常有學生誤以為波峰到波谷的垂直距離是振幅，其實那是 2 倍振幅。"}, {"id": 5, "chapter": "3-1 波的傳遞與特徵", "question": "若某一週期波在 2 秒內連續產生了 10 個完整波形，則此波的「頻率」應為多少赫茲（Hz）？", "options": {"A": "5 Hz", "B": "0.2 Hz", "C": "10 Hz", "D": "20 Hz"}, "answer": "A", "level": "基礎", "concept": "頻率的定義與計算", "explanation": "【解析】頻率 f = 全波次數 / 經過時間 = 10 / 2 = 5 Hz（每秒產生 5 次全波）。【避坑提醒】小心不要與週期（完成一次全波所需時間，T = 2 / 10 = 0.2 秒）搞混。"}, {"id": 6, "chapter": "3-1 波的傳遞與特徵", "question": "承上題，該波的「週期」為多少秒？", "options": {"A": "0.5 秒", "B": "0.2 秒", "C": "2 秒", "D": "5 秒"}, "answer": "B", "level": "基礎", "concept": "週期與頻率的倒數關係", "explanation": "【解析】週期 T = 1 / f = 1 / 5 = 0.2 秒，即產生一個全波需要 0.2 秒。【避坑提醒】牢記週期與頻率互為倒數（T × f = 1）。"}, {"id": 7, "chapter": "3-1 波的傳遞與特徵", "question": "下列哪一種波「不需要」介質即可在太空中傳播？", "options": {"A": "吉他彈奏時產生的聲波", "B": "海嘯產生的巨大水波", "C": "太陽傳遞到地球的光波", "D": "彈簧被壓縮後產生的疏密波"}, "answer": "C", "level": "基礎", "concept": "力學波與非力學波（電磁波）的差別", "explanation": "【解析】聲波、水波、彈簧波都需要物質（介質）來傳遞，屬於力學波；光波、無線電波等屬於電磁波（非力學波），可在真空中傳播。【避坑提醒】太陽光能穿越宇宙真空到達地球，證明光不需介質。"}, {"id": 8, "chapter": "3-1 波的傳遞與特徵", "question": "當一列連續橫波向右傳播時，介質偏離平衡位置最高的位置稱為什麼？", "options": {"A": "波谷", "B": "節點", "C": "振幅", "D": "波峰"}, "answer": "D", "level": "基礎", "concept": "橫波構造基本名詞", "explanation": "【解析】橫波中偏離平衡位置最高處稱為「波峰」，最低處稱為「波谷」。【避坑提醒】振幅是距離（數值），波峰是位置名詞。"}, {"id": 9, "chapter": "3-1 波的傳遞與特徵", "question": "連續敲擊音叉產生聲波，聲波在空氣中傳播時，空氣分子的振動方向與聲波的前進方向有何關係？", "options": {"A": "彼此互相平行", "B": "彼此互相垂直", "C": "形成順時針旋轉", "D": "毫無規則隨機運動"}, "answer": "A", "level": "基礎", "concept": "聲波為縱波的本質", "explanation": "【解析】聲波在空氣中傳播時，空氣分子前後振動擠壓，其振動方向與聲波行進方向「互相平行」，故聲波為縱波（疏密波）。【避坑提醒】不要因為平常畫聲波波形像高低波就誤認為聲波是橫波。"}, {"id": 10, "chapter": "3-1 波的傳遞與特徵", "question": "在同一條均勻的彈簧上，下列哪一種操作可以產生「縱波」？", "options": {"A": "手握彈簧末端規律上下搖動", "B": "手握彈簧末端沿著彈簧軸線方向規律前後推拉", "C": "手握彈簧末端規律左右擺動", "D": "手握彈簧末端劃圓圈甩動"}, "answer": "B", "level": "基礎", "concept": "彈簧縱波的產生方式", "explanation": "【解析】沿著彈簧軸線方向前後推拉，彈簧圈的振動方向與波前進方向平行，會產生疏密相間的縱波；上下或左右搖晃則產生橫波。【避坑提醒】前後推拉產生疏密波（縱波），上下搖晃產生高低波（橫波）。"}, {"id": 11, "chapter": "3-1 波的傳遞與特徵", "question": "某波動的波長為 40 公分，頻率為 5 赫茲，則此波的傳播速率為多少公分/秒？", "options": {"A": "8 公分/秒", "B": "45 公分/秒", "C": "200 公分/秒", "D": "400 公分/秒"}, "answer": "C", "level": "基礎", "concept": "波速公式 v = f × λ 之基礎計算", "explanation": "【解析】根據波速公式 v = f × λ，波速 = 5 Hz × 40 cm = 200 cm/s。【避坑提醒】注意單位需一致，若題目問公尺/秒，則為 2 m/s。"}, {"id": 12, "chapter": "3-1 波的傳遞與特徵", "question": "在觀察水波槽實驗時，水波通過深水區進入淺水區時，下列哪一個物理量「絕對不會」改變？", "options": {"A": "波長", "B": "波速", "C": "振幅", "D": "頻率"}, "answer": "D", "level": "基礎", "concept": "波傳入不同介質時頻率由波源決定", "explanation": "【解析】波由一種介質傳入另一種介質時，波速與波長會改變，但頻率完全由「原波源振動頻率」決定，因此頻率恆不變。【避坑提醒】跨介質傳播時「頻率不變」是段考極高頻考點。"}, {"id": 13, "chapter": "3-1 波的傳遞與特徵", "question": "用手拿著細繩的一端向上甩動一次後立即恢復原狀，在繩上形成一個波峰並向右傳去，這種只振動一次所形成的波稱為什麼？", "options": {"A": "單一脈衝波（脈波）", "B": "週期波", "C": "電磁波", "D": "駐波"}, "answer": "A", "level": "基礎", "concept": "脈波與週期波的區別", "explanation": "【解析】介質只受到一次短暫擾動所形成的波稱為脈波（脈衝波）；若波源進行持續且規律的振動，所形成的波才稱為週期波。【避坑提醒】注意題幹的「只甩動一次」即為脈波。"}, {"id": 14, "chapter": "3-1 波的傳遞與特徵", "question": "小明用力甩動繩子產生一個大波浪，小華輕輕甩動繩子產生一個小波浪。兩者產生的波形相比，小明產生的波具有較大的什麼？", "options": {"A": "波速", "B": "振幅", "C": "波長", "D": "週期"}, "answer": "B", "level": "基礎", "concept": "振幅反映波能量大小", "explanation": "【解析】用力甩動代表給予較多的能量，波的能量越大，振幅（波形高低）就越大；在同一條繩子上，波速是由繩子材質與張力決定，用力大小不會改變波速。【避坑提醒】用力甩不會讓波跑得比較快，只會讓振幅變大！"}, {"id": 15, "chapter": "3-1 波的傳遞與特徵", "question": "在一個連續橫波圖形中，兩個相鄰「波谷」之間的水平直線距離相當於幾個波長？", "options": {"A": "0.5 個波長", "B": "1.5 個波長", "C": "1 個波長", "D": "2 個波長"}, "answer": "C", "level": "基礎", "concept": "波長之圖形判讀", "explanation": "【解析】相鄰的兩個波峰之間、或相鄰的兩個波谷之間的水平距離，均為一個完整的週期波形，恰等於 1 個波長。【避坑提醒】一個波峰到緊鄰的下一個波谷只有半個波長（0.5 λ）。"}, {"id": 16, "chapter": "3-1 波的傳遞與特徵", "question": "在同一條材質均勻且鬆緊程度固定的繩子上，如果將手甩動的頻率增加為原本的 2 倍，則繩波的傳播速率與波長分別會如何變化？", "options": {"A": "波速變為 2 倍，波長不變", "B": "波速不變，波長變為 2 倍", "C": "波速變為 2 倍，波長變為 1/2 倍", "D": "波速不變，波長變為 1/2 倍"}, "answer": "D", "level": "中等", "concept": "同介質中波速固定，波長與頻率成反比", "explanation": "【解析】波速只取決於介質性質，同一均勻繩子波速固定不變（v 不變）。根據 v = f × λ，當頻率 f 增加為 2 倍時，波長 λ 必縮短為 1/2 倍。【避坑提醒】這是段考必考題！很多學生誤選波速變快，切記：甩得快不會讓波跑得快！"}, {"id": 17, "chapter": "3-1 波的傳遞與特徵", "question": "若一列週期波向右前進，某瞬間波形呈現一波峰在 x = 2 公分處，波谷在 x = 6 公分處。已知此波的波速為 20 公分/秒，則此波的頻率為何？", "options": {"A": "2.5 Hz", "B": "1.25 Hz", "C": "5 Hz", "D": "10 Hz"}, "answer": "A", "level": "中等", "concept": "波峰到波谷距離與波速公式綜合運算", "explanation": "【解析】相鄰波峰到波谷的距離為半個波長（λ/2 = 6 - 2 = 4 公分），因此波長 λ = 8 公分。代入波速公式 v = f × λ，20 = f × 8，求得 f = 2.5 Hz。【避坑提醒】相鄰波峰與波谷距離是半個波長，切勿直接當成一個波長計算。"}, {"id": 18, "chapter": "3-1 波的傳遞與特徵", "question": "一列向右傳播的橫波，在時間 t = 0 秒時，某質點正處於波峰位置。已知此波的週期為 4 秒，則在 t = 3 秒時，該質點的運動狀態為何？", "options": {"A": "正處於波谷位置", "B": "正通過平衡位置且向上運動", "C": "正通過平衡位置且向下運動", "D": "回到波峰位置"}, "answer": "B", "level": "中等", "concept": "週期波質點運動隨時間的相位變化", "explanation": "【解析】週期 T = 4 秒，每經過 1 秒代表經過 1/4 週期（T/4）。t = 0（波峰）→ t = 1（向下通過平衡位置）→ t = 2（波谷）→ t = 3（向上通過平衡位置）→ t = 4（回到波峰）。故 t = 3 秒時質點正通過平衡位置且向上運動。【避坑提醒】利用 1/4 週期拆解質點位置與運動方向是經典考法。"}, {"id": 19, "chapter": "3-1 波的傳遞與特徵", "question": "在彈簧縱波中，若測得相鄰兩個「密部中心」之間的距離為 15 公分，且密部中心移動 60 公分共費時 2 秒，則此彈簧波的頻率為多少？", "options": {"A": "0.5 Hz", "B": "4 Hz", "C": "2 Hz", "D": "30 Hz"}, "answer": "C", "level": "中等", "concept": "縱波波長判讀與波速、頻率關聯", "explanation": "【解析】縱波相鄰兩密部中心距離即為 1 個波長，故 λ = 15 公分。波速 v = 移動距離 / 時間 = 60 / 2 = 30 公分/秒。由 v = f × λ，30 = f × 15，求得頻率 f = 2 Hz。【避坑提醒】密部中心到相鄰疏部中心是半波長，相鄰兩密部中心才是全波長。"}, {"id": 20, "chapter": "3-1 波的傳遞與特徵", "question": "有一連續週期波在某均勻介質中傳播，波速為 300 公尺/秒。若其波長為 1.5 公尺，則介質每完成一次完整的上下振動需耗時多少秒？", "options": {"A": "450 秒", "B": "0.05 秒", "C": "200 秒", "D": "0.005 秒"}, "answer": "D", "level": "中等", "concept": "波速求週期（一次完整振動時間即週期）", "explanation": "【解析】「每完成一次完整振動的時間」即為週期 T。由 v = λ / T 可得 T = λ / v = 1.5 / 300 = 0.005 秒。【避坑提醒】看清楚題目問的是「時間（週期）」還是「次數（頻率）」。"}, {"id": 21, "chapter": "3-1 波的傳遞與特徵", "question": "當一列橫波向右前進時，若已知波形上的某質點正處於波谷與下一個波峰之間的平衡位置，此時該質點瞬間的運動方向為何？", "options": {"A": "向上", "B": "向下", "C": "向右", "D": "靜止不動"}, "answer": "A", "level": "中等", "concept": "利用波形微移法判斷質點瞬間運動方向", "explanation": "【解析】使用「微移法」：將整個波形稍微向右平移一小段虛線，觀察該平衡位置處的質點位移，會發現虛線波形位於實線上方，代表該質點此瞬間正向上運動。【避坑提醒】橫波介質絕不會向右運動；質點通過平衡位置時速度最大，不是靜止。"}, {"id": 22, "chapter": "3-1 波的傳遞與特徵", "question": "某位同學在 10 秒內將繩子上下規律振動了 20 次，測得繩波在繩上移動了 40 公尺，則該繩波的波長為多少公尺？", "options": {"A": "1 公尺", "B": "2 公尺", "C": "4 公尺", "D": "8 公尺"}, "answer": "B", "level": "中等", "concept": "波速、頻率與波長的綜合推算", "explanation": "【解析】頻率 f = 20 / 10 = 2 Hz；波速 v = 40 / 10 = 4 公尺/秒。由 v = f × λ，4 = 2 × λ，得 λ = 2 公尺。（亦可直接計算：20 個波總長 40 公尺，故 1 個波長 = 40 / 20 = 2 公尺）。【避坑提醒】理化題目有多種解法，直接用總長除以波數最直觀不易錯。"}, {"id": 23, "chapter": "3-1 波的傳遞與特徵", "question": "一列繩波在粗繩與細繩交界處傳播，當波從細繩傳入粗繩時，發現波速變慢了。若波的頻率保持不變，則波長會如何變化？", "options": {"A": "變長", "B": "不變", "C": "變短", "D": "先變長後變短"}, "answer": "C", "level": "中等", "concept": "波速與波長在跨介質時的正比關係", "explanation": "【解析】頻率 f 由波源決定故保持不變。由公式 v = f × λ 可知，當波速 v 變小時，波長 λ 也必定隨之變短（成正比）。【避坑提醒】「波速變慢，波長變短」是波動跨介質傳播的重要守恆規律。"}, {"id": 24, "chapter": "3-1 波的傳遞與特徵", "question": "下列哪一個圖形或現象，最能夠明確證明「波只傳遞能量而不傳遞介質」？", "options": {"A": "水波遇到池塘邊的水泥牆發生反彈", "B": "大聲喊叫時，遠處燭火劇烈搖晃但並未熄滅", "C": "用手拉長彈簧時，彈簧長度明顯伸長", "D": "看見遠處稻田中稻浪滾滾向遠方起伏，但每株稻穗仍牢固長在原處土裡"}, "answer": "D", "level": "中等", "concept": "自然界波傳遞能量之巨觀實證", "explanation": "【解析】風吹過稻田形成波浪看似前進，但每株稻穗（介質）都牢牢紮根在泥土中，只在原處前後擺動，完美印證了波動前進而介質不隨之前進的真理。【避坑提醒】生活常見的「稻浪」、「麥浪」是考試最喜愛的生動考題。"}, {"id": 25, "chapter": "3-1 波的傳遞與特徵", "question": "一列連續週期波在某瞬間的波形中，平衡位置與波峰的垂直距離為 5 公分，且從第 1 個波峰到第 4 個波峰的水平距離為 18 公分。則此波的「振幅」與「波長」分別為何？", "options": {"A": "振幅 5 公分，波長 6 公分", "B": "振幅 10 公分，波長 6 公分", "C": "振幅 5 公分，波長 4.5 公分", "D": "振幅 2.5 公分，波長 6 公分"}, "answer": "A", "level": "中等", "concept": "波峰間隔數與波長換算陷阱", "explanation": "【解析】振幅為平衡位置到波峰的距離 = 5 公分。第 1 個波峰到第 4 個波峰之間共有（4 - 1）= 3 個完整的波長間隔，因此 3 λ = 18 公分，λ = 6 公分。【避坑提醒】常有學生誤直接以 18 / 4 = 4.5 計算，切記第 1 到第 N 個波峰共有 (N-1) 個波長！"}, {"id": 26, "chapter": "3-1 波的傳遞與特徵", "question": "在平靜的水池中，水波以 2 公尺/秒的速率向外傳播。若池中心的浮標在 5 秒內共上下浮沉了 10 次，則此水波的波長為多少公尺？", "options": {"A": "0.5 公尺", "B": "1 公尺", "C": "2 公尺", "D": "4 公尺"}, "answer": "B", "level": "中等", "concept": "浮標浮沉次數求頻率再算波長", "explanation": "【解析】浮標上下浮沉 1 次即為 1 個週期振動。5 秒內浮沉 10 次，表示頻率 f = 10 / 5 = 2 Hz。由 v = f × λ 可知，2 = 2 × λ，故波長 λ = 1 公尺。【避坑提醒】浮標浮沉次數等於水波的振動次數。"}, {"id": 27, "chapter": "3-1 波的傳遞與特徵", "question": "將兩條粗細不同的繩子接在一起進行甩繩實驗。由細繩端產生一個波傳向粗繩，下列哪一組物理量在細繩與粗繩中是「完全相等」的？", "options": {"A": "波速與波長", "B": "振幅與波速", "C": "頻率與週期", "D": "波長與振幅"}, "answer": "C", "level": "中等", "concept": "波跨介質傳播之頻率與週期守恆性", "explanation": "【解析】介質改變（細繩傳入粗繩）會影響波速，進而影響波長，能量部分反射也會使振幅改變；但波源的振動頻率決定了波的頻率，故頻率與週期在兩繩中維持完全相等。【避坑提醒】任何波跨越介質，只有頻率 f 與週期 T 絕對不變。"}, {"id": 28, "chapter": "3-1 波的傳遞與特徵", "question": "甲、乙兩列橫波在同一條彈性繩上傳播，甲波的振幅為 4 cm、頻率為 10 Hz；乙波的振幅為 2 cm、頻率為 20 Hz。則甲波與乙波的「波速比」應為多少？", "options": {"A": "4：1", "B": "1：2", "C": "2：1", "D": "1：1"}, "answer": "D", "level": "中等", "concept": "同介質中波速相同之核心概念", "explanation": "【解析】波速純粹由「傳播介質」決定。甲、乙兩波是在「同一條彈性繩」上傳播，故波速必定相等，波速比為 1：1。【避坑提醒】題目故意給不同的振幅與頻率當誘答干擾項，請緊咬核心：「同一介質，波速相同」！"}, {"id": 29, "chapter": "3-1 波的傳遞與特徵", "question": "地震發生時會產生 P 波（主波，縱波）與 S 波（次波，橫波）。下列關於兩種地震波的比較，何者正確？", "options": {"A": "P 波地表介質前後擠壓振動，傳播速度較快", "B": "P 波地表介質上下或左右晃動，傳播速度較慢", "C": "S 波地表介質前後擠壓振動，傳播速度較快", "D": "S 波在真空中也可以傳播"}, "answer": "A", "level": "中等", "concept": "地科與理化跨科整合：P波與S波性質", "explanation": "【解析】P 波為縱波（Primary wave），質點振動方向與波前進方向平行（前後推擠），在地殼中波速較快，會先抵達測站；S 波為橫波（Secondary wave），質點垂直振動，速度較慢。【避坑提醒】P 波先到（跑得快、縱波），S 波後到（跑得慢、橫波）。"}, {"id": 30, "chapter": "3-1 波的傳遞與特徵", "question": "一列向左前進的連續橫波，已知波長為 12 公分，振幅為 3 公分。當介質質點自波谷移動到下一個波峰時，該質點所走過的總路徑長為多少公分？", "options": {"A": "3 公分", "B": "6 公分", "C": "12 公分", "D": "24 公分"}, "answer": "B", "level": "中等", "concept": "介質質點單次振動之路徑長計算", "explanation": "【解析】介質質點只在垂直方向上下振動。從波谷到平衡位置位移為一個振幅（3 cm），再由平衡位置到波峰又是一個振幅（3 cm），故質點走過的路徑長為 3 + 3 = 6 公分（即 2 個振幅）。【避坑提醒】質點在原地垂直移動，路徑長由振幅決定，與水平波長 12 公分無關！"}, {"id": 31, "chapter": "3-2 聲音的形成", "question": "發聲的音叉放入水中時會激起大量水花；用手按住正在發聲的鑼面時，聲音立即停止。這些現象主要說明了什麼？", "options": {"A": "聲音需要水作為介質才能傳播", "B": "聲音可以在任何物質中傳播", "C": "聲音是由物體的振動所產生的", "D": "手可以吸收所有的聲音能量"}, "answer": "C", "level": "基礎", "concept": "聲音由物體振動產生", "explanation": "【解析】水花濺起證明音叉正在振動；手按住鑼面使振動停止，聲音也隨之停止，證明聲音是由物體快速振動所產生。【避坑提醒】「振動停止，聲音即停止」是聲音產生的基本判斷準則。"}, {"id": 32, "chapter": "3-2 聲音的形成", "question": "波以耳進行經典的鐘罩實驗：將正在響鈴的鬧鐘放入玻璃鐘罩內，用抽氣機逐漸抽去罩內的空氣。在此過程中，我們聽到的鈴聲會有何變化？", "options": {"A": "鈴聲越來越大聲", "B": "鈴聲的頻率越來越慢", "C": "鈴聲的音調越來越高", "D": "鈴聲越來越小聲，最後幾乎聽不到"}, "answer": "D", "level": "基礎", "concept": "聲音傳播需要物質作為介質", "explanation": "【解析】聲音屬於力學波，必須依靠介質分子碰撞傳遞。抽氣機抽出空氣後，傳遞聲音的氣體分子減少，故鈴聲音量逐漸變小，完全真空時無法傳聲。【避坑提醒】注意鐘槌依然在敲擊鬧鈴，只是缺少介質將聲音傳至人耳。"}, {"id": 33, "chapter": "3-2 聲音的形成", "question": "太空人在月球表面漫步時，即使面對面大聲喊叫，對方也無法直接聽見，必須透過無線電通訊。其主要原因為何？", "options": {"A": "月球表面幾乎處於真空狀態，缺乏傳播聲音的介質", "B": "太空人說話的聲音能量太微弱", "C": "月球上的重力太小", "D": "太空衣的頭盔會完全吸收聲波"}, "answer": "A", "level": "基礎", "concept": "真空中無法傳播聲音", "explanation": "【解析】月球缺乏大氣層（接近真空），沒有傳遞聲波所需的空氣介質，而無線電屬於電磁波可在真空中傳播，故太空人需使用無線電對話。【避坑提醒】常有學生誤選月球重力太小，重力大小與聲波傳播無直接關聯。"}, {"id": 34, "chapter": "3-2 聲音的形成", "question": "在一般常溫常壓的條件下，聲音在下列哪一種介質中的傳播速率最快？", "options": {"A": "空氣", "B": "鋼鐵鐵軌", "C": "純水", "D": "真空"}, "answer": "B", "level": "基礎", "concept": "不同狀態介質之聲速比較（固體 > 液體 > 氣體）", "explanation": "【解析】固體分子排列最緊密，傳遞振動最有效率，因此聲速一般為：固體 > 液體 > 氣體。鋼鐵中的聲速約每秒 5000 公尺，遠快於水中（約 1500 m/s）與空氣中（約 340 m/s）。【避坑提醒】千萬不要把光速（真空 > 氣體 > 液體 > 固體）與聲速搞混！"}, {"id": 35, "chapter": "3-2 聲音的形成", "question": "古代打仗時，斥候常將耳朵貼在地面上偵聽遠方敵軍騎兵的馬蹄聲，這主要是利用了聲音的何種傳播特性？", "options": {"A": "地面的聲音傳播速率比空氣慢，聽得比較清楚", "B": "地面只傳播高頻率的聲音", "C": "固體（地面）傳播聲音的速率比空氣快且能量不易散失", "D": "人體耳朵貼在地面時聽力會自動增強"}, "answer": "C", "level": "基礎", "concept": "固體傳聲速度快且衰減少的生活實例", "explanation": "【解析】地面（固體）傳聲速率遠大於空氣，且大地能聚集並有效引導振動能量，使馬蹄聲比在空氣中傳播得更快、更遠。【避坑提醒】「耳朵貼地面」是考查固體傳聲特性的經典題目。"}, {"id": 36, "chapter": "3-2 聲音的形成", "question": "聲波在乾燥無風的空氣中傳播時，其傳播速率與空氣溫度的關係為何？", "options": {"A": "氣溫越高，聲速越慢", "B": "氣溫低於 0 ℃ 時聲速才會變快", "C": "氣溫高低對聲速完全沒有影響", "D": "氣溫越高，聲速越快"}, "answer": "D", "level": "基礎", "concept": "氣溫對空氣聲速的影響規律", "explanation": "【解析】空氣溫度越高，空氣分子的熱運動越劇烈、平均動能越大，碰撞傳遞能量越迅速，因此聲速越快（公式：v = 331 + 0.6T）。【避坑提醒】牢記「溫度高、分子動得快、聲速快」。"}, {"id": 37, "chapter": "3-2 聲音的形成", "question": "我們說話時之所以能發出聲音，主要是靠身體哪一個構造的快速振動？", "options": {"A": "聲帶", "B": "食道", "C": "氣管軟骨", "D": "舌頭"}, "answer": "A", "level": "基礎", "concept": "人體發聲原理（聲帶振動）", "explanation": "【解析】當肺部呼出的氣流通過喉部的聲帶時，促使聲帶產生規律振動，進而引發空氣共鳴發出聲音。【避坑提醒】聲帶是人體的發聲器官，耳膜則是聽覺受器。"}, {"id": 38, "chapter": "3-2 聲音的形成", "question": "潛水員在水面下游泳時，可以聽見水上快艇引擎運轉的聲音，這現象主要證明了什麼？", "options": {"A": "聲音在水中的傳播速度比在空氣中慢", "B": "液體（水）也可以作為傳播聲音的介質", "C": "水能將聲波轉變為電磁波傳播", "D": "人耳只能在水中聽見機械引擎的聲音"}, "answer": "B", "level": "基礎", "concept": "液體能夠傳播聲音", "explanation": "【解析】快艇引擎聲音穿透空氣進入水中，再經由水分子傳遞至潛水員耳中，證明液體確實可以傳遞聲波。【避坑提醒】海豚與鯨魚在深海交流也是利用液體傳聲的證明。"}, {"id": 39, "chapter": "3-2 聲音的形成", "question": "下列哪一種環境中最「不可能」聽見任何聲音？", "options": {"A": "充滿二氧化碳氣體的封閉玻璃室", "B": "高山稀薄的空氣中", "C": "太空中兩艘太空船完全暴露在宇宙的船艙外空隙", "D": "國際太空站內充滿氧氣的生活艙"}, "answer": "C", "level": "基礎", "concept": "真空中無法傳播聲波的情境判斷", "explanation": "【解析】太空船外為真空環境，沒有任何原子或分子等物質介質，聲波無法形成與傳播；而玻璃室、高山、太空艙內皆有氣體介質，故皆可傳聲。【避坑提醒】太空艙「內部」是有空氣的，人在艙內可正常說話聽聲！"}, {"id": 40, "chapter": "3-2 聲音的形成", "question": "在 15 ℃ 的乾燥空氣中，聲音傳播的速率大約為每秒多少公尺？", "options": {"A": "300 公尺/秒", "B": "300000 公尺/秒", "C": "1500 公尺/秒", "D": "340 公尺/秒"}, "answer": "D", "level": "基礎", "concept": "常溫常壓下常考聲速數值常識", "explanation": "【解析】在 15 ℃ 空氣中，聲速 v = 331 + 0.6 × 15 = 331 + 9 = 340 m/s，這是國中物理極為重要的基準常數。【避坑提醒】300,000 km/s 是光速，不要眼花混淆。"}, {"id": 41, "chapter": "3-2 聲音的形成", "question": "當氣溫為 25 ℃ 時，空氣中的聲速約為多少公尺/秒？（已知 0 ℃ 時空氣聲速為 331 公尺/秒，溫度每升高 1 ℃，聲速增加 0.6 公尺/秒）", "options": {"A": "346 公尺/秒", "B": "331 公尺/秒", "C": "356 公尺/秒", "D": "361 公尺/秒"}, "answer": "A", "level": "中等", "concept": "氣溫與聲速公式計算 v = 331 + 0.6T", "explanation": "【解析】代入聲速公式：v = 331 + 0.6 × T = 331 + 0.6 × 25 = 331 + 15 = 346 m/s。【避坑提醒】注意乘法先算：0.6 × 25 = 15，不要忘記加原本的 331。"}, {"id": 42, "chapter": "3-2 聲音的形成", "question": "在某次打雷時，小智先看到閃電，經過 3 秒後才聽到雷聲。已知當時氣溫為 15 ℃（空氣聲速約 340 m/s），且光速極快可忽略傳播時間，則雷擊發生的地點距離小智大約多遠？", "options": {"A": "113 公尺", "B": "1020 公尺", "C": "510 公尺", "D": "2040 公尺"}, "answer": "B", "level": "中等", "concept": "利用光速與聲速時間差計算雷擊距離", "explanation": "【解析】光速約 3×10^8 m/s 極快，可視為閃電瞬間抵達；聲音以 340 m/s 移動 3 秒，距離 = 速率 × 時間 = 340 × 3 = 1020 公尺。【避坑提醒】有些同學會誤以為像回聲一樣需要除以 2，雷聲是單程傳播，不要多除以 2！"}, {"id": 43, "chapter": "3-2 聲音的形成", "question": "有一列火車在遠處鐵軌上鳴笛，小明站在鐵軌旁，同時將一隻耳朵貼在鐵軌上、另一隻耳朵聽空氣中的聲音。小明會觀察到何種現象？", "options": {"A": "空氣中的聲音會先傳入耳朵", "B": "兩隻耳朵會同時聽到鳴笛聲", "C": "耳朵貼在鐵軌上會先聽到鳴笛聲", "D": "鐵軌中聽不到任何鳴笛聲"}, "answer": "C", "level": "中等", "concept": "固體聲速大於氣體聲速之實驗比較", "explanation": "【解析】鋼軌是固體，聲速約 5000 m/s，遠大於空氣中的聲速（約 340 m/s），因此經由鋼軌傳遞的聲波會先抵達耳朵。【避坑提醒】聲音在不同介質傳遞有不同速度，同一聲源會產生前後兩次聽覺。"}, {"id": 44, "chapter": "3-2 聲音的形成", "question": "關於聲音在空氣中傳播的過程，下列敘述何者「錯誤」？", "options": {"A": "空氣分子的振動方向與聲波的前進方向互相平行", "B": "聲波通過時，空氣各處會形成疏密相間的壓力分布", "C": "空氣分子在原處附近來回推擠，將能量傳遞出去", "D": "空氣分子會隨著聲波一路從發音處移動到聽者的耳中"}, "answer": "D", "level": "中等", "concept": "聲音傳播之微觀分子運動本質與常見迷思", "explanation": "【解析】聲波傳播時，空氣分子只是在原本的位置附近前後微幅振動並推擠相鄰分子，分子本身「不會」從發音處一路奔跑到聽者耳中。【避坑提醒】「分子不隨波移動」是波動最重要的概念，極常考判斷題。"}, {"id": 45, "chapter": "3-2 聲音的形成", "question": "在鐘罩抽氣實驗中，即使鐘罩內已抽成高度真空，我們「仍然可以看到」罩內鬧鈴的指針在轉動、鐘槌在敲擊。這說明了下列何種性質？", "options": {"A": "光可以在真空中傳播，但聲音不能在真空中傳播", "B": "光和聲音一樣都需要介質傳播", "C": "指針和鐘槌發出的是超聲波", "D": "玻璃完全阻隔了聲音但放大了光線"}, "answer": "A", "level": "中等", "concept": "波以耳實驗：光波與聲波傳播介質的對比", "explanation": "【解析】抽真空後聽不到聲音證明聲音需介質；仍能看到鬧鐘運作證明光線能穿透真空傳至人眼，光不需介質即可傳播。【避坑提醒】這題是橫跨 CH3 聲波與 CH4 光波的極佳對比題。"}, {"id": 46, "chapter": "3-2 聲音的形成", "question": "在同一間教室中，老師講課時，前排同學與後排同學聽到的聲音，下列哪一項物理量「完全相同」？", "options": {"A": "聲音的音量大小（響度）", "B": "聲音的傳播速率", "C": "聲音傳入耳朵時的振幅", "D": "聲音傳遞過程消耗的能量"}, "answer": "B", "level": "中等", "concept": "同一空間空氣介質中聲速恆定", "explanation": "【解析】教室各處空氣的溫度與成分相同，即介質相同，因此老師聲音傳播的「速率」處處相同；後排同學離得遠，音量與振幅會隨距離增加而減弱。【避坑提醒】介質固定，波速就固定，不論距離遠近或講話大聲小聲！"}, {"id": 47, "chapter": "3-2 聲音的形成", "question": "下列關於聲音傳播速率的敘述，何者正確？", "options": {"A": "說話越大聲（振幅越大），聲速越快", "B": "唱歌音調越高（頻率越高），聲速越快", "C": "夏天的中午（氣溫較高）在操場講話，聲速比寒冷的冬天下雪時快", "D": "聲音在順風時傳播速率與逆風時完全相同"}, "answer": "C", "level": "中等", "concept": "聲速只受介質（溫度、風向、狀態）影響，不受響度與音調影響", "explanation": "【解析】聲速由介質決定，氣溫越高空氣聲速越快（夏天聲速大於冬天）；音量（振幅）與音調（頻率）皆不改變聲速。【避坑提醒】大聲叫不會讓聲音飛得比較快到達！"}, {"id": 48, "chapter": "3-2 聲音的形成", "question": "氣象主播播報：「今天白天戶外氣溫為 30 ℃，夜晚驟降至 10 ℃。」若在空曠操場上說話，白天與夜晚空氣中的聲速大約相差多少公尺/秒？", "options": {"A": "6 公尺/秒", "B": "30 公尺/秒", "C": "20 公尺/秒", "D": "12 公尺/秒"}, "answer": "D", "level": "中等", "concept": "溫差造成聲速變化的差值計算", "explanation": "【解析】溫度每差 1 ℃，聲速差 0.6 m/s。溫差 ΔT = 30 - 10 = 20 ℃，聲速差 Δv = 0.6 × 20 = 12 m/s。【避坑提醒】直接用溫差乘以 0.6 計算最為快速準確。"}, {"id": 49, "chapter": "3-2 聲音的形成", "question": "某位探險家在深邃的山谷中對著岩壁大喊一聲，此時聲音在空氣中傳播時，空氣分子的密集處與相鄰稀疏處的壓力關係為何？", "options": {"A": "密集處壓力大於稀疏處壓力", "B": "密集處壓力小於稀疏處壓力", "C": "密集處與稀疏處壓力完全相等", "D": "空氣各處壓力皆維持為絕對真空"}, "answer": "A", "level": "中等", "concept": "聲波疏密波之壓力微觀變化", "explanation": "【解析】聲波是縱波，密部空氣分子擠壓聚集，密度較大、氣壓較高；疏部空氣分子分散，密度較小、氣壓較低，因此聲波又稱為壓力波。【避坑提醒】密部 = 壓力高，疏部 = 壓力低。"}, {"id": 50, "chapter": "3-2 聲音的形成", "question": "在電影星際大戰中，常出現太空戰艦在太空中爆炸，發出震耳欲聾的轟隆巨響的情節。從物理學角度來看，此情節是否符合科學事實？", "options": {"A": "符合，因為爆炸產生的能量極大，足以撕裂真空傳遞聲音", "B": "不符合，因為太空中幾乎是真空狀態，聲音無法在真空中傳播", "C": "符合，因為太空戰艦殘骸會作為介質傳遞聲音", "D": "不符合，因為太空中的極度低溫會將聲波凍結"}, "answer": "B", "level": "中等", "concept": "生活影視與科學辨析：太空不能傳聲", "explanation": "【解析】太空中缺少傳遞聲波所需的物質介質（真空狀態），即使戰艦發生大爆炸，聲音也絕對無法傳遞出去，電影中的音效純屬戲劇效果。【避坑提醒】科幻電影中的太空爆炸巨響是常考的科學辨誤題。"}, {"id": 51, "chapter": "3-3 多變的聲音", "question": "日常生活中常說某人的聲音「很尖銳」或「很低沉」，這是指聲音三要素中的哪一項特性？", "options": {"A": "音量（響度）", "B": "音色", "C": "音調", "D": "波速"}, "answer": "C", "level": "基礎", "concept": "聲音高低（尖銳/低沉）即為音調", "explanation": "【解析】聲音的尖銳或低沉是指聲音的高低，即為「音調」，決定於物體振動的頻率。【避坑提醒】「尖銳」常被誤認為「很大聲（響度）」，請記住高低音是音調，大聲小聲才是響度。"}, {"id": 52, "chapter": "3-3 多變的聲音", "question": "在音樂會上，我們閉上眼睛也能輕易分辨出是「小提琴」還是「鋼琴」在演奏同一首曲子，這主要是因為兩者的什麼特性不同？", "options": {"A": "音調高低不同", "B": "響度大小不同", "C": "傳播速率不同", "D": "音色（波形）不同"}, "answer": "D", "level": "基礎", "concept": "音色取決於波形，用於辨別發音體", "explanation": "【解析】即使音調相同（同音符）且響度相同，因不同樂器材質與構造不同，所發出的聲波「波形」不同，即「音色」不同，故能分辨。【避坑提醒】分辨不同樂器、不同人的聲音，一律選「音色」或「波形」。"}, {"id": 53, "chapter": "3-3 多變的聲音", "question": "用鼓棒用力敲擊大鼓與輕輕敲擊大鼓相比，下列哪一項物理量會明顯變大？", "options": {"A": "聲波的振幅（響度）", "B": "聲波的波長", "C": "發聲的頻率", "D": "聲波在空氣中的傳播速率"}, "answer": "A", "level": "基礎", "concept": "敲擊力道決定振幅與響度", "explanation": "【解析】用力敲擊給予鼓面較多能量，鼓面振動幅度變大，產生的聲波振幅變大，因此音量（響度）變大；發音體的振動頻率與介質聲速皆未改變。【避坑提醒】用力敲鼓，聲音會變大（響度大），但音調（頻率）與波速皆不變！"}, {"id": 54, "chapter": "3-3 多變的聲音", "question": "表示聲音音量大小（響度）的常用單位為何？", "options": {"A": "公尺/秒（m/s）", "B": "分貝（dB）", "C": "赫茲（Hz）", "D": "牛頓（N）"}, "answer": "B", "level": "基礎", "concept": "響度單位分貝（dB）", "explanation": "【解析】響度的常用單位為分貝（dB）；赫茲（Hz）為頻率（音調）單位；m/s 為速率單位。【避坑提醒】注意分辨分貝（dB）與赫茲（Hz）的物理意義。"}, {"id": 55, "chapter": "3-3 多變的聲音", "question": "表示聲音音調高低（振動快慢/頻率）的常用單位為何？", "options": {"A": "分貝（dB）", "B": "公分（cm）", "C": "赫茲（Hz）", "D": "焦耳（J）"}, "answer": "C", "level": "基礎", "concept": "音調單位赫茲（Hz）", "explanation": "【解析】音調取決於發音體的振動頻率，頻率的國際標準單位為赫茲（Hz，代表每秒振動次數）。【避坑提醒】赫茲代表振動次數/秒，分貝代表聲音能量強弱。"}, {"id": 56, "chapter": "3-3 多變的聲音", "question": "若示波器螢幕上顯示兩段聲波波形，在相同的時間寬度內，甲波形有 4 個完整波，乙波形有 8 個完整波。由此可知何者音調較高？", "options": {"A": "甲的音調較高", "B": "無法從波形數量判斷音調", "C": "兩者音調一樣高", "D": "乙的音調較高"}, "answer": "D", "level": "基礎", "concept": "波形圖中波的疏密（波數）代表頻率與音調", "explanation": "【解析】相同時間內，乙出現了 8 個完整波，表示乙的振動頻率較大，頻率越大則音調越高。【避坑提醒】波形越密（波數越多），代表頻率越高、音調越高。"}, {"id": 57, "chapter": "3-3 多變的聲音", "question": "在吉他彈奏時，如果想要讓某一根弦彈出來的聲音「音調變高」，下列哪一種做法是正確的？", "options": {"A": "用手指將弦壓短", "B": "將弦的調音旋鈕旋鬆", "C": "更用力撥動琴弦", "D": "換成一根更粗的琴弦"}, "answer": "A", "level": "基礎", "concept": "弦樂器音調調整原則（短、細、緊發高音）", "explanation": "【解析】弦愈短、愈細、愈緊，振動頻率愈高，音調愈高。手指壓住琴弦使其振動長度變短，會使音調變高。【避坑提醒】用力撥弦只會讓聲音變大（響度），不會讓音調變高；旋鬆會讓音調變低。"}, {"id": 58, "chapter": "3-3 多變的聲音", "question": "下列哪一種聲音通常會被定義為「噪音」？", "options": {"A": "鋼琴演奏出的美妙旋律", "B": "工廠機具運轉發出雜亂無章且令人不適的巨大聲響", "C": "小提琴拉奏的和諧樂章", "D": "合唱團規律優雅的和聲"}, "answer": "B", "level": "基礎", "concept": "樂音與噪音的定義", "explanation": "【解析】波形規律聽起來悅耳的聲音稱為樂音；波形雜亂無規則、使人煩躁或影響身心健康的聲音稱為噪音。【避坑提醒】噪音除了波形無規律外，也包含音量過大造成干擾的聲音。"}, {"id": 59, "chapter": "3-3 多變的聲音", "question": "長期處於多少分貝以上的噪音環境中，容易造成聽力永久性受損？", "options": {"A": "30 分貝", "B": "50 分貝", "C": "85 分貝", "D": "10 分貝"}, "answer": "C", "level": "基礎", "concept": "噪音防制常識與分貝基準", "explanation": "【解析】一般超過 70 分貝會讓人感到煩躁，長期暴露在 85 分貝以上環境極易造成聽力退化與受損。【避坑提醒】85 分貝是職業安全與教材常強調的警戒指標。"}, {"id": 60, "chapter": "3-3 多變的聲音", "question": "同一支音叉不論用力敲擊還是輕輕敲擊，下列哪一項特性「始終維持不變」？", "options": {"A": "聲音傳入耳中的能量", "B": "發聲的音量（響度）", "C": "振動的振幅", "D": "發聲的音調（頻率）"}, "answer": "D", "level": "基礎", "concept": "特定音叉具有固定固有振動頻率", "explanation": "【解析】每支音叉因其形狀、材質與質量固定，具有固定的固有振動頻率（上標有 Hz 數值）。用力大小只改變振幅與響度，音調絕對不變。【避坑提醒】音叉是標準定頻發聲器，敲大力不會改變音叉的頻率！"}, {"id": 61, "chapter": "3-3 多變的聲音", "question": "兩支頻率同為 440 Hz 的音叉放置在相鄰位置。敲擊其中一支音叉後用手按住使其停止，發現另一支未敲擊的音叉竟然也發出聲音，此現象稱為什麼？", "options": {"A": "共振（共鳴）", "B": "回聲", "C": "折射", "D": "超聲波"}, "answer": "A", "level": "基礎", "concept": "同頻率物體之共振（共鳴）現象", "explanation": "【解析】當兩物體振動頻率相同時，一物體發聲振動可引發另一物體隨之振動發聲，此現象稱為共振（聲音的共鳴）。【避坑提醒】共振的前提條件是「頻率必須相同」。"}, {"id": 62, "chapter": "3-3 多變的聲音", "question": "蚊子飛過耳邊時常發出惱人的嗡嗡高音，而鳥類拍動翅膀飛行時我們卻聽不到高音，其主要原因為何？", "options": {"A": "蚊子體型小，所以發出的聲音響度很大", "B": "蚊子翅膀每秒拍動的次數（頻率）遠多於鳥類", "C": "鳥類翅膀拍動產生的波長比蚊子短", "D": "鳥類拍動翅膀的聲音在空氣中無法傳播"}, "answer": "B", "level": "基礎", "concept": "翅膀振動頻率決定音調高低的生活實例", "explanation": "【解析】蚊子翅膀每秒振動數百次（頻率高），發出高音調的嗡嗡聲；鳥類每秒只拍翅數次（頻率低於人耳聽覺下限 20 Hz），故聽不到尖銳聲。【避坑提醒】振動頻率越高，音調越高。"}, {"id": 63, "chapter": "3-3 多變的聲音", "question": "在示波器上觀察波形時，波形在垂直方向上的「波峰到平衡位置的高低幅度」，對應到聲音的何種特性？", "options": {"A": "音調高低", "B": "音色種類", "C": "響度大小", "D": "傳播速率快慢"}, "answer": "C", "level": "基礎", "concept": "波形圖垂直幅度對應振幅與響度", "explanation": "【解析】垂直方向的上下幅度代表振幅，振幅越大，聲音的能量越多，響度（音量）越大。【避坑提醒】上下高度看響度，水平疏密看音調。"}, {"id": 64, "chapter": "3-3 多變的聲音", "question": "吹奏直笛時，手指按住不同的笛孔可以吹出「Do、Re、Mi」等不同音調，這主要是改變了笛子內部的什麼？", "options": {"A": "笛身振動的振幅大小", "B": "笛子本身的音色", "C": "吹氣的氣流溫度", "D": "空氣柱的長度"}, "answer": "D", "level": "基礎", "concept": "管樂器透過改變空氣柱長度調節音調", "explanation": "【解析】管樂器發聲源為管內空氣柱。手指按住不同孔穴可改變振動空氣柱的長度，空氣柱越短振動越快、音調越高。【避坑提醒】管樂器發聲的主體是管內的「空氣柱」，非管壁。"}, {"id": 65, "chapter": "3-3 多變的聲音", "question": "下列關於聲音三要素的配對，何者完全正確？", "options": {"A": "響度－振幅、音調－頻率、音色－波形", "B": "響度－波形、音調－頻率、音色－振幅", "C": "響度－頻率、音調－振幅、音色－波形", "D": "響度－振幅、音調－波長、音色－波速"}, "answer": "A", "level": "基礎", "concept": "聲音三要素與波動物理量之核心對應", "explanation": "【解析】響度決定於振幅，音調決定於頻率，音色決定於波形。這是國中波動學最基礎也最重要的口訣配對。【避坑提醒】務必把「響幅、調頻、色形」六字訣背熟！"}, {"id": 66, "chapter": "3-3 多變的聲音", "question": "在四個完全相同的玻璃試管中分別裝入不同高度的水（甲試管裝 1/4 水、乙裝 1/2 水、丙裝 3/4 水、丁裝滿水）。若用嘴唇對著試管口「吹氣」，則哪一個試管發出的音調最高？", "options": {"A": "甲試管", "B": "丙試管", "C": "乙試管", "D": "丁試管（裝滿水幾乎無空氣）"}, "answer": "B", "level": "中等", "concept": "試管吹氣實驗之空氣柱振動規律", "explanation": "【解析】對試管口「吹氣」時，振動發聲的是「試管內的水面上方空氣柱」。水越多，管內剩餘的空氣柱越短，空氣柱越短振動頻率越快，音調越高（丙試管水較多，空氣柱短，音調最高；丁全滿無法形成吹氣共鳴空氣柱）。【避坑提醒】這是段考最高頻陷阱題！吹氣看空氣柱：水多→空氣柱短→音調高！"}, {"id": 67, "chapter": "3-3 多變的聲音", "question": "承上題，若改用鐵湯匙輕輕「敲擊」試管的管壁，則哪一個試管發出的音調最高？", "options": {"A": "丙試管", "B": "乙試管", "C": "甲試管", "D": "丁試管"}, "answer": "C", "level": "中等", "concept": "試管敲擊實驗之管身與水振動規律", "explanation": "【解析】用湯匙「敲擊」試管時，振動發聲的是「試管本身與裡面的水」。甲試管內的水最少，整體總質量最輕，敲擊時振動最快，因此發出的音調最高。【避坑提醒】敲擊看水：水越少→質量越輕→振動越快→音調越高！吹氣與敲擊剛好完全相反！"}, {"id": 68, "chapter": "3-3 多變的聲音", "question": "小明在實驗室利用麥克風記錄四種聲音甲、乙、丙、丁在示波器上的波形。若在相同的時間座標範圍內，甲波的振幅為 2 格、全波數為 4 個；乙波的振幅為 4 格、全波數為 4 個；丙波的振幅為 2 格、全波數為 8 個。則下列何者敘述正確？", "options": {"A": "甲的音調比丙高", "B": "乙與丙的音調相同", "C": "丙的音量（響度）比乙大", "D": "乙的音量（響度）比甲大"}, "answer": "D", "level": "中等", "concept": "示波器數值定量判別響度與音調", "explanation": "【解析】乙的振幅為 4 格，甲的振幅為 2 格，振幅大代表響度大，故乙的音量比甲大；全波數代表頻率，丙有 8 個波，頻率高於甲、乙，故丙音調最高。【避坑提醒】高低幅度看振幅（響度），波的個數看頻率（音調）。"}, {"id": 69, "chapter": "3-3 多變的聲音", "question": "有一把烏克麗麗（四弦琴），第一弦彈奏發出的音調偏低，若演奏者想要將第一弦調至標準的較高音調，他應該採取下列哪一項調整？", "options": {"A": "將第一弦的弦栓旋緊，增加弦的張力", "B": "將第一弦的弦栓旋鬆，減小弦的張力", "C": "改用更大力道撥彈第一弦", "D": "在第一弦上抹潤滑油"}, "answer": "A", "level": "中等", "concept": "弦張力對音調之影響", "explanation": "【解析】將弦旋緊會增加張力，使弦振動時回彈更迅速、振動頻率增加，音調因而提高。【避坑提醒】旋緊＝音調變高；旋鬆＝音調變低。"}, {"id": 70, "chapter": "3-3 多變的聲音", "question": "關於聲音分貝數（dB）的計算觀念，若 60 分貝的聲音聽起來是正常交談聲，當聲音增加到 70 分貝時，其聲音的能量強度（強度比）增加了多少倍？", "options": {"A": "1.16 倍", "B": "10 倍", "C": "70 倍", "D": "100 倍"}, "answer": "B", "level": "中等", "concept": "分貝為對數尺度：每增 10 分貝能量增 10 倍", "explanation": "【解析】分貝是指數對數尺度，分貝每增加 10 dB，聲音能量強度即增加 10 倍（增加 20 dB 增加 100 倍）。從 60 到 70 分貝增加了 10 dB，故強度增加為 10 倍。【避坑提醒】分貝不是等差等比例，增加 10 分貝是差 10 倍能量，增加 20 分貝是差 100 倍！"}, {"id": 71, "chapter": "3-3 多變的聲音", "question": "下列甲（400 Hz）、乙（500 Hz）、丙（400 Hz）、丁（600 Hz）四支音叉，敲擊哪一支音叉時，可以引起丙音叉產生共振現象？", "options": {"A": "丁音叉", "B": "乙音叉", "C": "甲音叉", "D": "任何一支都可以"}, "answer": "C", "level": "中等", "concept": "共振發生的充要條件為固有頻率相同", "explanation": "【解析】兩發音體必須具有「完全相同的固有頻率」才會發生共振。丙的頻率為 400 Hz，只有甲音叉（400 Hz）與其頻率相同，故能引發共振。【避坑提醒】音調或頻率只要有一點差異就不會共振。"}, {"id": 72, "chapter": "3-3 多變的聲音", "question": "小華用同一把長笛，先以微弱氣流吹出一個低音 Do，接著用力猛吹使長笛吹出一個高音 Do。在這兩次發聲過程中，下列比較何者正確？", "options": {"A": "高音 Do 的頻率較大，且在空氣中傳播的速率也較快", "B": "低音 Do 在空氣中的傳播速率較快", "C": "高音 Do 的振幅一定比低音 Do 小", "D": "低音 Do 的波長較長，但兩者在空氣中的傳播速率相同"}, "answer": "D", "level": "中等", "concept": "音調高低與波長關係及同介質波速守恆", "explanation": "【解析】兩者皆在同溫空氣中傳播，波速 v 相同。低音 Do 頻率 f 較小，由 v = f × λ 可知其波長 λ 較長；高音波長較短。波速由介質決定，兩者波速相同。【避坑提醒】高音低音在同一空氣中跑得「一樣快」！"}, {"id": 73, "chapter": "3-3 多變的聲音", "question": "下列四種樂器演奏時的主要振動發聲部位，何者配對「錯誤」？", "options": {"A": "小喇叭——管身銅金屬本身劇烈振動", "B": "小提琴——琴弦振動", "C": "長笛——管內空氣柱振動", "D": "定音鼓——鼓皮振動"}, "answer": "A", "level": "中等", "concept": "管樂器發聲主體為空氣柱之辨析", "explanation": "【解析】小喇叭屬於銅管樂器，其發聲原理是由吹奏者唇部振動激發「管內空氣柱」共鳴，而非金屬管身振動。【避坑提醒】所有管樂器（長笛、黑管、小號、長號）皆以「管內空氣柱」為主要振動體。"}, {"id": 74, "chapter": "3-3 多變的聲音", "question": "甲、乙兩人在同一房間合唱。甲發出 200 Hz、80 分貝的男低音，乙發出 800 Hz、60 分貝的女高音。下列關於兩人在房間內聲音的比較，何者正確？", "options": {"A": "甲聲音的傳播速率比乙快", "B": "甲聲音在空氣中傳播時振幅較大", "C": "乙聲音的波長是甲的 4 倍", "D": "乙聲音傳到聽者耳朵的時間比甲快"}, "answer": "B", "level": "中等", "concept": "聲速、波長、頻率、響度之跨觀念綜合判別", "explanation": "【解析】同房間空氣介質相同，甲乙聲速相同；甲 80 分貝高於乙 60 分貝，故甲振幅較大；乙頻率 800 Hz 是甲 200 Hz 的 4 倍，由 v = f × λ 可知乙波長應為甲的 1/4 倍。【避坑提醒】振幅看分貝（甲較大），波速同介質皆相等。"}, {"id": 75, "chapter": "3-3 多變的聲音", "question": "在電影院看電影時，常能感受到震撼的爆破音浪使身體胸腔產生共鳴，這是因為爆破音具有何種特徵？", "options": {"A": "頻率極高", "B": "波長極短", "C": "振幅極大，攜帶大量能量", "D": "在空氣中傳播速率超越光速"}, "answer": "C", "level": "中等", "concept": "巨響帶來衝擊感源於大振幅與高能量", "explanation": "【解析】爆破聲等震撼巨響具有極大的「振幅」，振幅越大代表聲波攜帶並傳遞的機械動能越大，因此能推動人體組織產生強烈震感。【避坑提醒】震感是能量（振幅）的體現，而非波速或頻率超高。"}, {"id": 76, "chapter": "3-3 多變的聲音", "question": "若將兩支不同頻率的音叉分別敲擊後貼近水面，觀察水花噴濺情形。若甲音叉頻率為 256 Hz，乙音叉頻率為 512 Hz，在兩者響度相同的情況下，下列敘述何者正確？", "options": {"A": "甲音叉振動較快", "B": "甲音叉的聲音在空氣中傳得比較遠", "C": "乙音叉產生的波長比甲音叉長", "D": "乙音叉每秒振動次數是甲音叉的 2 倍"}, "answer": "D", "level": "中等", "concept": "頻率數值之物理意義詮釋", "explanation": "【解析】頻率 512 Hz 代表每秒振動 512 次，恰為 256 Hz 的 2 倍，故乙每秒振動次數是甲的 2 倍；頻率高的乙波長較短。【避坑提醒】Hz 的定義就是「每秒完整振動的次數」。"}, {"id": 77, "chapter": "3-3 多變的聲音", "question": "小明在吉他的第三弦上將手指由靠近琴頭端逐漸向琴身端移動壓弦並依序撥動，他聽到的吉他聲音調會有何變化？", "options": {"A": "音調逐漸變高", "B": "音調逐漸變低", "C": "音調忽高忽低", "D": "音調完全不變，只有響度變大"}, "answer": "A", "level": "中等", "concept": "吉他有效弦長變化對音調的連續影響", "explanation": "【解析】手指由琴頭向琴身移動，手指到琴橋之間的「有效振動弦長」越來越短。弦越短，振動頻率越快，故彈出的音調會逐漸變高。【避坑提醒】弦樂器壓弦越往琴身靠，振動部分越短，聲音越尖高。"}, {"id": 78, "chapter": "3-3 多變的聲音", "question": "某位歌手在舞台上歌唱時，能夠發出音量達 90 分貝且頻率高達 1000 Hz 的高亢歌聲。下列敘述何者正確？", "options": {"A": "90 分貝是指歌手聲音的音色特性", "B": "該歌聲的振幅大且每秒聲帶振動次數達 1000 次", "C": "1000 Hz 是指其聲波的傳播速率為 1000 m/s", "D": "該歌聲可以在完全沒有空氣的真空中傳播"}, "answer": "B", "level": "中等", "concept": "分貝與赫茲在生活發聲情境中的定量結合", "explanation": "【解析】90 分貝代表聲音能量強、振幅大；1000 Hz 代表頻率高，聲帶每秒振動 1000 次。【避坑提醒】Hz 是每秒振動次數，不是速度！"}, {"id": 79, "chapter": "3-3 多變的聲音", "question": "敲擊一個懸掛在空中的金屬管，若金屬管長度越長，敲擊時發出的音調通常會如何？", "options": {"A": "越高", "B": "不變", "C": "越低", "D": "與長度無關，只與敲擊力量有關"}, "answer": "C", "level": "中等", "concept": "固體發音體體積/質量與頻率的普遍反比關係", "explanation": "【解析】固體發音體（如管鐘、風鈴、鐵琴片）長度越長、體積與質量越大，慣性越大使得振動越慢，因此頻率越低、音調越低。【避坑提醒】發音體「粗長厚重→低音；短細薄輕→高音」是跨樂器的通用法則。"}, {"id": 80, "chapter": "3-3 多變的聲音", "question": "小芬對著空保溫杯口吹氣，發出「嗚嗚」的低沉聲音；當她將溫水慢慢倒入保溫杯中並持續吹氣時，聽到的聲音會有何改變？", "options": {"A": "音量直接消失", "B": "音調逐漸降低", "C": "音調完全不變", "D": "音調逐漸升高"}, "answer": "D", "level": "中等", "concept": "注水過程吹氣之空氣柱動態縮短效應", "explanation": "【解析】隨著水倒入杯中，杯內水面上方的「空氣柱長度逐漸縮短」。吹氣時空氣柱越短，振動頻率越快，因此發出的音調會逐漸升高。【避坑提醒】吹氣水越多，空氣柱越短，音調變高！生活中倒水聽聲音變尖就是此原理。"}, {"id": 81, "chapter": "3-4 聲波的傳播與應用", "question": "在空曠的山谷中大聲喊叫，經過一段時間後會聽到自己的回音。這個現象主要是因為聲波發生了何種現象？", "options": {"A": "反射", "B": "折射", "C": "色散", "D": "共振"}, "answer": "A", "level": "基礎", "concept": "回聲是由聲波反射所造成", "explanation": "【解析】回聲是聲波在傳播途中遇到障礙物（如山壁）反彈回原介質的「反射」現象。【避坑提醒】光遇到鏡子反彈是反射，聲音遇到牆壁反彈也是反射。"}, {"id": 82, "chapter": "3-4 聲波的傳播與應用", "question": "聲波在空氣中遇到高大岩壁反射形成回聲，在同溫度的空氣中，回聲與原聲相比，下列哪一項物理量「必定變小」？", "options": {"A": "聲波的波速", "B": "聲波的振幅（音量）", "C": "聲波的波長", "D": "聲波的頻率"}, "answer": "B", "level": "基礎", "concept": "回聲反射後能量衰減，振幅減小", "explanation": "【解析】回聲與原聲在同一空氣介質中傳播，波速相同；頻率由原波源決定，波長亦不變。但傳播與碰撞過程中部分能量被吸收散失，故振幅變小、音量變弱。【避坑提醒】回聲「跑得一樣快、音調一樣高」，只有「聲音變小聲」！"}, {"id": 83, "chapter": "3-4 聲波的傳播與應用", "question": "正常人耳能聽見的聲音頻率範圍，大約介於多少赫茲之間？", "options": {"A": "0 ～ 20 Hz", "B": "20000 ～ 200000 Hz", "C": "20 ～ 20000 Hz", "D": "任何頻率皆可聽見"}, "answer": "C", "level": "基礎", "concept": "人類聽覺頻率範圍（20 ~ 20000 Hz）", "explanation": "【解析】人類耳膜的聽覺敏感頻率區間約在 20 Hz 到 20000 Hz 之間，低於 20 Hz 稱為次聲波，高於 20000 Hz 稱為超聲波，人耳皆無法聽見。【避坑提醒】20 到 20000 Hz 是國中自然必背的常識範圍。"}, {"id": 84, "chapter": "3-4 聲波的傳播與應用", "question": "頻率高於 20000 赫茲（Hz）的聲波稱為什麼？", "options": {"A": "次聲波", "B": "電磁波", "C": "光波", "D": "超聲波（超音波）"}, "answer": "D", "level": "基礎", "concept": "超聲波之定義", "explanation": "【解析】頻率大於 20000 Hz 的機械波稱為超聲波（超音波），人耳無法聽見，但蝙蝠、海豚等動物可利用其導航。【避坑提醒】超聲波是「頻率極高」的聲波，仍然是力學波，不是光波或電磁波。"}, {"id": 85, "chapter": "3-4 聲波的傳播與應用", "question": "電影院或音樂廳的牆壁通常會鋪設厚絨布簾或多孔吸音板，其主要目的為何？", "options": {"A": "吸收部分聲波，減少雜亂回聲的干擾", "B": "增加聲音的反射，使聲音聽起來更宏亮", "C": "提高樂器發出的音調", "D": "加速聲音傳播到最後一排觀眾的速度"}, "answer": "A", "level": "基礎", "concept": "多孔柔軟材料吸收聲波減少回聲", "explanation": "【解析】柔軟、多孔、表面粗糙的材質（如絨布、吸音海綿）容易吸收聲波能量，防止聲音在牆壁間多次反射形成嗡嗡混雜的回聲，以維護音質清晰。【避坑提醒】光滑堅硬易反射，柔軟多孔易吸音。"}, {"id": 86, "chapter": "3-4 聲波的傳播與應用", "question": "蝙蝠在完全漆黑的洞穴中飛行時，能夠靈巧避開障礙物並精準捕捉飛蛾，主要是利用了何種機制？", "options": {"A": "發射紅外線感知溫度", "B": "發射超聲波並接收回聲進行定位（回聲定位）", "C": "依靠敏銳的夜間視力", "D": "透過翅膀感知風向變化"}, "answer": "B", "level": "基礎", "concept": "動物的回聲定位應用（超聲波）", "explanation": "【解析】蝙蝠喉部能發射頻率高於 20000 Hz 的超聲波脈衝，並用靈敏的雙耳接收障礙物或獵物反射的回聲，從而判斷距離與方向。【避坑提醒】蝙蝠利用的是「超聲波回聲」，不是視力或紅外線。"}, {"id": 87, "chapter": "3-4 聲波的傳播與應用", "question": "下列哪一種現代生活科技「沒有」利用超聲波？", "options": {"A": "婦產科醫師觀察孕婦腹中胎兒的發育狀況", "B": "眼鏡行利用洗淨槽清洗眼鏡上的微小髒污", "C": "利用微波爐加熱杯中的冰牛奶", "D": "倒車雷達探測車後障礙物距離"}, "answer": "C", "level": "基礎", "concept": "超聲波的生活應用判讀", "explanation": "【解析】微波爐加熱食物使用的是電磁波中的「微波」，利用水分子共振產熱，並非超聲波；產檢、超音波清洗機、倒車雷達皆是利用超聲波。【避坑提醒】「微波」是電磁波，超音波是聲波，兩者名稱易混淆。"}, {"id": 88, "chapter": "3-4 聲波的傳播與應用", "question": "在普通較小的教室中說話時，我們通常不會聽到明顯的回聲，其最主要原因為何？", "options": {"A": "教室的牆壁會將聲音百分之百吸收", "B": "教室內的桌椅會使聲音的波速大幅減慢", "C": "教室內只有空氣，聲波在空氣中不會反射", "D": "教室空間較小，回聲與原聲到達耳朵的時間差極短，大腦無法區分"}, "answer": "D", "level": "基礎", "concept": "人耳分辨回聲與原聲的時間極限", "explanation": "【解析】人耳要區分回聲與原聲，兩者傳入耳朵的時間間隔必須大於約 0.1 秒。小教室距離牆壁很近，反射波幾乎瞬間返回與原聲混疊在一起，因此大腦無法分開辨識。【避坑提醒】小房間「有回聲」，只是大腦分不出來，反而讓聲音聽起來更響亮！"}, {"id": 89, "chapter": "3-4 聲波的傳播與應用", "question": "船隻上的聲納系統向海底垂直發射聲波，主要是利用聲波的何種性質來探測海洋深度？", "options": {"A": "聲音遇到海底反射回來的時間差", "B": "聲音的折射", "C": "聲音在水中的音調變化", "D": "聲音在海水中完全不消耗能量"}, "answer": "A", "level": "基礎", "concept": "聲納測距原理", "explanation": "【解析】聲納（SONAR）由船底向下發射超聲波，記錄聲波觸及海床後「反射」返回的時間，已知聲音在海水中的傳播速率，即可計算海底深度。【避坑提醒】聲納是測量「反射聲波的時間」。"}, {"id": 90, "chapter": "3-4 聲波的傳播與應用", "question": "下列關於超聲波特性的敘述，何者正確？", "options": {"A": "超聲波在空氣中的傳播速率比一般人耳聽得到的聲音快好幾倍", "B": "超聲波的方向性高，且能量集中不易發散", "C": "超聲波可以在完全沒有介質的太空中傳播", "D": "超聲波的頻率低於 20 Hz"}, "answer": "B", "level": "基礎", "concept": "超聲波之波動特性優點", "explanation": "【解析】超聲波因頻率極高、波長極短，在傳播時方向性佳、不易發散，能量集中，故極適合用於探測與清洗；但其傳播速率與一般聲音相同，且仍需要介質傳遞。【避坑提醒】超聲波不會跑得比較快！在同一空氣中聲速一樣！"}, {"id": 91, "chapter": "3-4 聲波的傳播與應用", "question": "在常溫（15 ℃，聲速為 340 m/s）的環境下，人耳要能清晰分辨出原聲與回聲，發音者與反射障礙物之間至少需要保持多少公尺的距離？（已知人耳能分辨兩聲音的最小時間間隔為 0.1 秒）", "options": {"A": "68 公尺", "B": "34 公尺", "C": "17 公尺", "D": "170 公尺"}, "answer": "C", "level": "中等", "concept": "回聲分辨最小距離計算（單程 17 公尺）", "explanation": "【解析】聲波來回障礙物一趟的時間需達 0.1 秒。總傳播路徑 = 聲速 × 時間 = 340 × 0.1 = 34 公尺。因為是來回一趟，所以單程距離至少需為 34 / 2 = 17 公尺。【避坑提醒】段考必考題！算出來 34 公尺務必記得除以 2，因為聲音走的是來回兩趟！"}, {"id": 92, "chapter": "3-4 聲波的傳播與應用", "question": "一艘探測船靜止停泊在海面上，利用聲納垂直向海底發射超聲波，經過 4 秒後接收到反射的回聲。若海水中聲波的傳播速率為 1500 公尺/秒，則該處的海深為多少公尺？", "options": {"A": "1500 公尺", "B": "12000 公尺", "C": "6000 公尺", "D": "3000 公尺"}, "answer": "D", "level": "中等", "concept": "聲納回聲測量海深之定量計算", "explanation": "【解析】聲波從發射到海底再反射回船隻，共耗時 4 秒，因此單程到達海底的時間為 4 / 2 = 2 秒。海深 = 聲速 × 單程時間 = 1500 × 2 = 3000 公尺。【避坑提醒】回聲測距永遠記得「時間要折半」或「總距離除以 2」。"}, {"id": 93, "chapter": "3-4 聲波的傳播與應用", "question": "小明站在兩座平行的垂直高山峭壁甲與乙之間，對著峭壁大喊一聲。若 1 秒後聽到來自甲峭壁的第一道回聲，再隔 1 秒（即喊叫後共 2 秒）聽到來自乙峭壁的第二道回聲。已知當時聲速為 340 m/s，則兩座峭壁之間的距離為多少公尺？", "options": {"A": "510 公尺", "B": "340 公尺", "C": "680 公尺", "D": "1020 公尺"}, "answer": "A", "level": "中等", "concept": "雙壁回聲之距離綜合計算", "explanation": "【解析】小明到甲峭壁距離 = 340 × (1 / 2) = 170 公尺；小明到乙峭壁距離 = 340 × (2 / 2) = 340 公尺。兩峭壁間總距離 = 170 + 340 = 510 公尺。（亦可直接計算：聲音來回總時間 1 + 2 = 3 秒，總距離 = 340 × 3 / 2 = 510 公尺）。【避坑提醒】兩面牆分別反射，分段計算再相加最不易犯錯。"}, {"id": 94, "chapter": "3-4 聲波的傳播與應用", "question": "小華在一座大禮堂內演講，發現台下聽眾聽不清楚他的聲音，反應有嗡嗡的雜音混濁在一起。小華應該建議主辦單位採取下列哪一項改善措施？", "options": {"A": "將禮堂所有牆面重新油漆粉刷成平滑的大理石鏡面", "B": "在禮堂四周牆壁加掛厚重的褶皺絨布簾", "C": "拆除地上所有地毯改鋪拋光磁磚", "D": "換裝更大功率的擴音喇叭加大音量"}, "answer": "B", "level": "中等", "concept": "室內建築聲學：吸音材料消除多重回聲干擾", "explanation": "【解析】聲音混濁是由於牆面反射形成的多重回聲重疊干擾。加掛厚重褶皺絨布簾可有效吸收反射聲波，消除雜亂回聲；改用大理石或拋光磁磚反而會加劇反射干擾。【避坑提醒】加大音量只會讓回聲更大聲，無法根本解決回聲干擾。"}, {"id": 95, "chapter": "3-4 聲波的傳播與應用", "question": "在同一間乾燥且溫度為 20 ℃ 的實驗室中，研究員同時發射一束頻率為 1000 Hz 的可聽聲波與一束頻率為 40000 Hz 的超聲波。下列關於這兩束聲波在實驗室傳播的比較，何者正確？", "options": {"A": "超聲波的傳播速率比可聽聲波快 40 倍", "B": "可聽聲波的能量一定比超聲波大", "C": "超聲波的波長比可聽聲波短", "D": "超聲波可以在真空中傳播，可聽聲波不行"}, "answer": "C", "level": "中等", "concept": "可聽聲與超聲波在同介質中之物理量對比", "explanation": "【解析】兩者皆在同溫空氣中傳播，波速相同（v 不變）。根據 v = f × λ，超聲波頻率 f 較高（40000 Hz），其波長 λ 必定較短。【避坑提醒】超聲波「頻率高、波長短」，但波速完全一樣快！"}, {"id": 96, "chapter": "3-4 聲波的傳播與應用", "question": "一輛汽車以 20 公尺/秒的等速度朝著前方垂直岩壁直線行駛。當車子鳴笛一聲後，駕駛經過 4 秒後聽見岩壁反射回來的笛聲。已知當時空氣中的聲速為 340 公尺/秒，則駕駛「鳴笛的瞬間」，汽車距離岩壁多遠？", "options": {"A": "680 公尺", "B": "800 公尺", "C": "760 公尺", "D": "720 公尺"}, "answer": "D", "level": "中等", "concept": "行進車輛鳴笛回聲之相對運動計算", "explanation": "【解析】在 4 秒內，聲波走過的路徑為 340 × 4 = 1360 公尺；汽車前進的路徑為 20 × 4 = 80 公尺。鳴笛瞬間，聲音向岩壁跑再反彈遇上迎面而來的汽車，故「聲音走的距離 + 汽車走的距離 = 2 倍的原始車壁距離」。1360 + 80 = 1440 公尺，原始距離 = 1440 / 2 = 720 公尺。【避坑提醒】車子迎向岩壁時，聲音路徑加上車行路徑等於兩倍原距！"}, {"id": 97, "chapter": "3-4 聲波的傳播與應用", "question": "下列關於「回聲」與「原聲」反射特性的比較，何者正確？", "options": {"A": "回聲的入射角與反射角遵循反射定律，兩者角度相等", "B": "聲波反射時不需要法線概念", "C": "回聲遇到粗糙表面反射時，入射角大於反射角", "D": "回聲的頻率會因反射而減半"}, "answer": "A", "level": "中等", "concept": "聲波反射亦嚴格遵守反射定律", "explanation": "【解析】波動反射時皆嚴格遵守反射定律：入射線、反射線與法線在同一平面上，且入射角等於反射角。不論聲波或光波皆然。【避坑提醒】反射定律適用於所有波動（水波、聲波、光波）。"}, {"id": 98, "chapter": "3-4 聲波的傳播與應用", "question": "醫學上使用的「超音波掃描儀」之所以能清晰看見人體內部臟器的輪廓，其運作原理與下列何者最為相似？", "options": {"A": "X 光穿透骨骼感光成影", "B": "蝙蝠夜間發出聲波偵測障礙物距離與輪廓", "C": "近視眼鏡折射光線聚焦", "D": "收音機接收天線無線電訊號"}, "answer": "B", "level": "中等", "concept": "超音波人體探測之物理實質", "explanation": "【解析】超音波掃描儀向人體發射高頻超聲波，利用不同密度組織（如脂肪、肌肉、骨骼）交界面反射聲波的時間與強度差異繪製器官影像，原理與蝙蝠回聲定位完全一致。【避坑提醒】超音波不具游離輻射，是利用聲波反射成像。"}, {"id": 99, "chapter": "3-4 聲波的傳播與應用", "question": "某人站在一座大峭壁前 85 公尺處大聲喊叫。已知當時空氣聲速為 340 公尺/秒，則此人喊叫後經過多少秒會聽見自己的回聲？", "options": {"A": "0.25 秒", "B": "1 秒", "C": "0.5 秒", "D": "2 秒"}, "answer": "C", "level": "中等", "concept": "回聲來回時間計算", "explanation": "【解析】聲音傳播總路程為來回兩趟 = 85 × 2 = 170 公尺。聽見回聲所需時間 t = 總路程 / 聲速 = 170 / 340 = 0.5 秒。【避坑提醒】計算回聲所需時間，切記路程必須乘以 2！"}, {"id": 100, "chapter": "3-4 聲波的傳播與應用", "question": "登山者在山頂對著相鄰兩座山谷大喊，若甲山谷在 2 秒後傳回回聲，乙山谷在 3 秒後傳回回聲。下列敘述何者正確？", "options": {"A": "甲山谷距離登山者較遠", "B": "乙山谷傳回的回聲波速較快", "C": "乙山谷回聲的音調一定比甲山谷高", "D": "甲山谷的距離與登山者相距約 340 公尺（設聲速 340 m/s）"}, "answer": "D", "level": "中等", "concept": "回聲時間與距離正比關係判斷", "explanation": "【解析】時間越長代表距離越遠，故乙山谷較遠；波速只受介質決定，兩者波速相同；甲山谷距離 = 340 × (2 / 2) = 340 公尺。【避坑提醒】聲音來回 2 秒，單程剛好 1 秒，距離即為 1 秒的聲速（340 m）。"}, {"id": 101, "chapter": "4-1 光的傳播", "question": "在陽光普照的日子裡，地面上會出現樹木與行人的影子；立竿見影、古代利用日晷測量時間。這些現象主要是因為光的何種特性所造成的？", "options": {"A": "光在同一均勻介質中沿直線傳播", "B": "光的折射", "C": "光的色散", "D": "光的反射"}, "answer": "A", "level": "基礎", "concept": "光的直線傳播（直進性）造成影子", "explanation": "【解析】光在均勻介質中沿直線傳播，當遇到不透明的物體時，光線無法繞過物體後方，便在物體背光處形成陰影。【避坑提醒】影子、日晷、立竿見影皆是光的「直進性」最典型生活實例。"}, {"id": 102, "chapter": "4-1 光的傳播", "question": "光在下列哪一種介質中的傳播速率最快？", "options": {"A": "水", "B": "真空", "C": "空氣", "D": "玻璃"}, "answer": "B", "level": "基礎", "concept": "光在真空中的傳播速率最快", "explanation": "【解析】光是非力學波，不需要介質，在真空中行進最不受阻礙，速率最快（約 3×10^8 m/s）。光在介質中的速率大小關係為：真空 ＞ 空氣 ＞ 水 ＞ 玻璃。【避坑提醒】光速與聲速恰好相反！聲速是固體 > 液體 > 氣體，真空中為零。"}, {"id": 103, "chapter": "4-1 光的傳播", "question": "天文學上常用「光年」來表示天體之間的距離，下列關於「光年」的敘述，何者正確？", "options": {"A": "光年是測量時間的單位，代表光照射地球一年的時間", "B": "光年是測量光線亮度的單位", "C": "光年是測量距離的單位，代表光在真空中前進一年的距離", "D": "光年是測量恆星壽命的單位"}, "answer": "C", "level": "基礎", "concept": "光年為長度（距離）單位", "explanation": "【解析】光年（Light-year）是天文學中用來衡量浩瀚天體距離的單位，定義為光在真空中沿直線傳播一年所走過的「距離」長度。【避坑提醒】雖然名字有「年」，但它絕對不是時間單位！段考極高頻送分題。"}, {"id": 104, "chapter": "4-1 光的傳播", "question": "古代墨子曾記載「針孔成像」實驗。用蠟燭置於帶有小圓孔的紙板前，在後方的紙屏上可以看到蠟燭火焰的像。該像的性質為何？", "options": {"A": "正立縮小的虛像", "B": "正立放大的虛像", "C": "上下正立、左右相反的實像", "D": "上下顛倒、左右相反的實像"}, "answer": "D", "level": "基礎", "concept": "針孔成像之成像性質（倒立實像）", "explanation": "【解析】燭焰頂端發出的光沿直線通過小孔到達紙屏下方，底部發出的光通過小孔到達紙屏上方，因此在屏幕上形成「上下顛倒、左右相反」的倒立實像。【避坑提醒】能在屏幕或紙屏上接收到的像必定是「實像」，且針孔成像必定「上下倒立、左右相反」。"}, {"id": 105, "chapter": "4-1 光的傳播", "question": "在針孔成像實驗中，若將針孔由原先的「圓形」改戳成「三角形」，在蠟燭位置與距離均不變的情況下，紙屏上所成的像會有何變化？", "options": {"A": "像依然是燭焰上下顛倒的像，形狀沒有改變", "B": "像會變成三角形的像", "C": "像會消失看不見", "D": "像會變成正立的像"}, "answer": "A", "level": "基礎", "concept": "針孔形狀不影響成像形狀", "explanation": "【解析】針孔成像的形狀完全取決於「發光源（蠟燭）本身的形狀」，只要小孔夠小，針孔形狀（圓形、三角形、方形）並不影響紙屏上成像的形狀。【避坑提醒】經典陷阱！樹蔭下的圓形光斑是太陽的像，不是樹葉縫隙的形狀！"}, {"id": 106, "chapter": "4-1 光的傳播", "question": "下列哪一種自然天文奇景主要是由於「光的直線傳播」所造成的？", "options": {"A": "雨後天空中出現美麗的彩虹", "B": "月球運行到太陽與地球之間形成的日食", "C": "在炎熱柏油路上看見遠處的海市蜃樓倒影", "D": "筷子插入水中看似折斷"}, "answer": "B", "level": "基礎", "concept": "日食與月食成因源於光的直進性", "explanation": "【解析】月球運行到太陽與地球之間，月球擋住了沿直線前進的陽光，其陰影投射在地球上形成「日食」，這是光直進性的典型天文現象；彩虹是色散，海市蜃樓與筷子是折射。【避坑提醒】日食（日月地一直線）與月食（日地月一直線）都是光直進的結果。"}, {"id": 107, "chapter": "4-1 光的傳播", "question": "在陽光穿透濃密樹林的枝葉縫隙時，常能在地面上看到一條條明亮筆直的光束（廷得耳效應），這直觀地證明了光具有何種傳播特性？", "options": {"A": "光的折射", "B": "光的色散", "C": "光沿直線傳播", "D": "光的能量可轉變為質量"}, "answer": "C", "level": "基礎", "concept": "光束直線軌跡生活實例", "explanation": "【解析】空氣中的微小塵埃或水氣散射了光線，讓我們清晰看到陽光沿直線路徑穿過森林，直接印證了光的直進性。【避坑提醒】看見筆直光柱（如舞廳探照燈、林間陽光）皆是直進性的視覺證據。"}, {"id": 108, "chapter": "4-1 光的傳播", "question": "光在真空中的傳播速率大約為每秒多少公里？", "options": {"A": "340 公里/秒", "B": "3000 公里/秒", "C": "30000000 公里/秒", "D": "300000 公里/秒（30 萬公里/秒）"}, "answer": "D", "level": "基礎", "concept": "光速常數數值認知（3 × 10^5 km/s）", "explanation": "【解析】光在真空中速度約為 3 × 10^8 m/s，換算成公里為 3 × 10^5 km/s，即每秒約 30 萬公里（相當於一秒繞地球七圈半）。【避坑提醒】注意單位：30 萬「公里/秒」或 3 億「公尺/秒」，不要看錯單位大小。"}, {"id": 109, "chapter": "4-1 光的傳播", "question": "我們之所以能看見本身不發光的物體（例如課本、黑板、月亮），主要是因為下列何者？", "options": {"A": "光源的光線照射到物體表面後反射進入人眼", "B": "物體吸收光線後產生內部磷光", "C": "人眼會主動發射探測光束照射物體", "D": "空氣將物體的影像折射至人眼"}, "answer": "A", "level": "基礎", "concept": "看見不發光物體的視覺形成原理", "explanation": "【解析】本身不發光的物體，是藉由反射外來光源的光線進入我們的眼睛，刺激視網膜形成視覺。【避坑提醒】古代曾有「眼睛發出光線看東西」的錯誤迷思，人眼是接收器而非光源！"}, {"id": 110, "chapter": "4-1 光的傳播", "question": "陽光穿過茂密樹木的細小樹葉縫隙，在樹蔭下的地面上常形成許多圓形的光斑。這些圓形光斑實際上是什麼？", "options": {"A": "樹葉縫隙本身的圓形輪廓", "B": "太陽通過樹葉細孔所成的倒立實像", "C": "地面碎石反光的現象", "D": "光線在空氣中色散的結果"}, "answer": "B", "level": "基礎", "concept": "樹蔭下圓形光斑為針孔成像現象", "explanation": "【解析】樹葉交錯間的微小縫隙相當於無數個「小孔」，陽光穿過進行「針孔成像」，在地面上形成太陽（發光源）的圓形倒立實像；日食時這些光斑會變成缺角形狀。【避坑提醒】樹蔭光斑是太陽的像，不是樹葉縫隙的形狀！"}, {"id": 111, "chapter": "4-1 光的傳播", "question": "小明利用自製的針孔照相機觀察遠處燃燒的蠟燭。若保持蠟燭與針孔的距離不變，將後方的紙屏（毛玻璃）「逐漸遠離」針孔，則紙屏上的像會有何變化？", "options": {"A": "像逐漸變小，且亮度變暗", "B": "像逐漸變大，且亮度變亮", "C": "像逐漸變大，且亮度變暗", "D": "像的大小與亮度皆維持不變"}, "answer": "C", "level": "中等", "concept": "針孔成像之像距對像大小與亮度的影響", "explanation": "【解析】像的大小與像距成正比。當紙屏遠離針孔（像距變大），光線散開的範圍更廣，因此所成的像「變大」；而通過針孔的總光量固定，分散在較大面積上，故像的亮度「變暗」。【避坑提醒】像距越大像越大，但光分散所以變暗。"}, {"id": 112, "chapter": "4-1 光的傳播", "question": "在針孔成像實驗中，若在紙板上再多戳三個相鄰的小孔，則紙屏上將會觀察到何種現象？", "options": {"A": "原本的像變得更清晰", "B": "像會由倒立轉變為正立", "C": "所有的像瞬間消失", "D": "出現四個互相重疊或分立的像"}, "answer": "D", "level": "中等", "concept": "多孔成像之疊加效應", "explanation": "【解析】每一個小孔都會各自獨立形成一個完整的燭焰倒立實像。若有四個孔，就會在紙屏上形成四個位置稍微偏移的像；若孔過多過大，像互相重疊就會變成一片模糊的光斑。【避坑提醒】一個小孔一個像，孔太大等同無數小孔疊加，造成模糊。"}, {"id": 113, "chapter": "4-1 光的傳播", "question": "小華身高 160 公分，站在路燈正下方時，地面幾乎沒有影子。當他以等速度直線遠離路燈時，他在地面上的影子長度會有何變化？", "options": {"A": "影子長度逐漸變長", "B": "影子長度逐漸變短", "C": "影子長度保持不變", "D": "影子先變長再變短"}, "answer": "A", "level": "中等", "concept": "點光源下人走動與影子長度幾何關係", "explanation": "【解析】路燈為點光源，人離路燈越遠，路燈光線射過人頭頂抵達地面的入射角越傾斜，在地面被遮蔽的背光區域越大，因此影子長度會「逐漸變長」。【避坑提醒】越遠離路燈影子越長，越靠近路燈影子越短。"}, {"id": 114, "chapter": "4-1 光的傳播", "question": "太陽與地球之間的平均距離約為 1 億 5 千萬公里（1.5 × 10^8 公里）。已知光速約為每秒 30 萬公里（3 × 10^5 公里/秒），則太陽光照射到地球大約需要耗時多久？", "options": {"A": "8 秒", "B": "500 秒（約 8 分 20 秒）", "C": "80 秒", "D": "1 年"}, "answer": "B", "level": "中等", "concept": "光速距離公式計算 t = S / v", "explanation": "【解析】時間 t = 距離 / 光速 = (1.5 × 10^8 km) / (3 × 10^5 km/s) = 500 秒 = 8 分 20 秒。這意味著我們此刻看到的陽光是太陽 8 分鐘前發出的。【避坑提醒】500 秒換算為 8 分鐘又 20 秒，這是著名的常識計算題。"}, {"id": 115, "chapter": "4-1 光的傳播", "question": "在完全無風無波浪的清澈湖水中，光線從空氣射入水中傳播。下列關於光在空氣與水中傳播的比較，何者正確？", "options": {"A": "光在水中無法直線前進", "B": "光在水中的傳播速率比在空氣中快", "C": "光在水中的傳播速率比在空氣中慢", "D": "光需要水分子振動才能在水中傳播"}, "answer": "C", "level": "中等", "concept": "光在不同介質中之速度關係（空氣中快於水中）", "explanation": "【解析】光在越緻密的介質中受到原子電磁相互作用影響越大，傳播速度越慢。光在水中的速度約為真空中光速的 3/4（約 2.25×10^8 m/s），慢於空氣中（接近 3×10^8 m/s）。【避坑提醒】切記光速在水中比空氣慢，這也是後續「折射」產生的根本原因。"}, {"id": 116, "chapter": "4-1 光的傳播", "question": "針孔成像實驗中，若蠟燭高度為 6 公分，蠟燭到針孔的距離為 20 公分，針孔到紙屏的距離為 10 公分，則紙屏上所成的像高度為多少公分？", "options": {"A": "2 公分", "B": "12 公分", "C": "6 公分", "D": "3 公分"}, "answer": "D", "level": "中等", "concept": "針孔成像相似三角形幾何比例計算", "explanation": "【解析】由光直進形成的相似三角形可知：像高 / 物高 = 像距 / 物距。像高 / 6 = 10 / 20 = 1/2，故像高 = 3 公分。【避坑提醒】「像高/物高 = 像距/物距」是幾何光學最簡單卻極重要的等比公式。"}, {"id": 117, "chapter": "4-1 光的傳播", "question": "日環食發生時，地面上某位學生觀察樹蔭下的光斑，他將會看到地面上的光斑呈現何種形狀？", "options": {"A": "環狀（指環形）光斑", "B": "細小的針狀三角形", "C": "仍然是完整的圓形", "D": "完全變黑，看不見任何光斑"}, "answer": "A", "level": "中等", "concept": "日食時樹蔭光斑隨太陽形狀改變之實證", "explanation": "【解析】樹蔭下的光斑本質上就是太陽通過針孔成的像。當發生日環食時，太陽本身呈現環狀（指環形），因此紙屏（地面）上成的像也會呈現環狀。【避坑提醒】太陽缺一角，光斑就缺一角；太陽是環形，光斑就是環形。"}, {"id": 118, "chapter": "4-1 光的傳播", "question": "在皮影戲表演中，藝師將皮影人偶「逐漸靠近光源（燈泡）」時，白布幕上觀眾看到的影子大小會有何變化？", "options": {"A": "影子逐漸變小", "B": "影子逐漸變大", "C": "影子大小完全不變", "D": "影子倒立過來"}, "answer": "B", "level": "中等", "concept": "皮影戲原理：物體靠近點光源使陰影放大", "explanation": "【解析】皮影戲人偶靠近點光源時，人偶邊緣擋住的光線張角變大，光線投射到布幕上的背光陰影面積增大，因此影子變大。【避坑提醒】靠近光源遮光角變大→影子變大；遠離光源靠近布幕→影子縮小。"}, {"id": 119, "chapter": "4-1 光的傳播", "question": "下列四位同學關於「光與聲音」特性的比較，哪一位同學的說法完全正確？", "options": {"A": "小明：「光和聲音在真空中都不能傳播。」", "B": "小華：「光在固體中傳播最快，聲音在空氣中傳播最快。」", "C": "小美：「光可以在真空中傳播，但聲音需要介質才能傳播。」", "D": "小英：「光波屬於力學波，聲波屬於電磁波。」"}, "answer": "C", "level": "中等", "concept": "光波與聲波本質之跨單元綜合辨析", "explanation": "【解析】光是電磁波，不需介質即可在真空中傳播；聲音是力學波，必須依靠物質介質才能傳播，故小美說法完全正確。【避坑提醒】段考最愛考光與聲的對照題，牢記：光不用介質（真空中最快），聲音一定要介質（真空中不能傳）。"}, {"id": 120, "chapter": "4-1 光的傳播", "question": "若地球與月球之間的距離約為 38 萬公里，阿姆斯壯登月時從月球發射雷射光束照射地球，雷射光大約需要幾秒才能抵達地球？", "options": {"A": "約 0.13 秒", "B": "約 1 小時", "C": "約 8 分鐘", "D": "約 1.27 秒"}, "answer": "D", "level": "中等", "concept": "光速在地月距離之實際計算", "explanation": "【解析】光速約 30 萬公里/秒。時間 t = 距離 / 光速 = 380,000 / 300,000 ≈ 1.27 秒。【避坑提醒】地月通信大約有 1 秒多延遲，也是光速有限的直接證明。"}, {"id": 121, "chapter": "4-2 光的反射與面鏡成像", "question": "光線照射到平面鏡上發生反射時，所謂的「法線」是指下列何者？", "options": {"A": "垂直於鏡面的假想垂直線", "B": "平行於鏡面的直線", "C": "入射光線的反方向延長線", "D": "反射光線與鏡面的夾角平分線"}, "answer": "A", "level": "基礎", "concept": "法線的定義", "explanation": "【解析】在光學反射中，垂直於反射面（鏡面）的假想直線稱為「法線」，所有入射角與反射角都是以此線為基準測量。【避坑提醒】法線與鏡面夾角永遠是 90 度。"}, {"id": 122, "chapter": "4-2 光的反射與面鏡成像", "question": "一束光線射向平面鏡，若入射光線與鏡面的夾角為 30°，則此時的「反射角」應為多少度？", "options": {"A": "30°", "B": "60°", "C": "90°", "D": "120°"}, "answer": "B", "level": "基礎", "concept": "入射角與反射角的正確定義與計算", "explanation": "【解析】入射角是入射光線與「法線」的夾角。因為法線與鏡面垂直（90°），所以入射角 = 90° - 30° = 60°。根據反射定律，反射角 = 入射角 = 60°。【避坑提醒】這是段考最經典的陷阱！題目常給「與鏡面的夾角」，千萬記得要用 90° 去減！"}, {"id": 123, "chapter": "4-2 光的反射與面鏡成像", "question": "小華身高 160 公分，站在直立的全身平面穿衣鏡前 1 公尺處。他在鏡中所成的像之性質為何？", "options": {"A": "倒立放大實像", "B": "正立放大虛像", "C": "正立等大虛像", "D": "正立縮小實像"}, "answer": "C", "level": "基礎", "concept": "平面鏡成像性質（正立、等大、虛像）", "explanation": "【解析】平面鏡成像是由反射光線的反向延長線交會而成，無法在紙屏上顯現，屬於「虛像」；像與物體大小相等（等大），且方向為「正立」。【避坑提醒】平面鏡「永遠成正立等大虛像」，絕不可能放大或縮小！"}, {"id": 124, "chapter": "4-2 光的反射與面鏡成像", "question": "承上題，小華站在平面鏡前 1 公尺處，則小華本人與鏡中的像之間的距離為多少公尺？", "options": {"A": "0.5 公尺", "B": "1 公尺", "C": "4 公尺", "D": "2 公尺"}, "answer": "D", "level": "基礎", "concept": "平面鏡物距等於像距", "explanation": "【解析】平面鏡成像時，物體到鏡面的距離（物距）等於像到鏡面的距離（像距）。小華到鏡面 1 公尺，像到鏡面也是 1 公尺，因此人與像的距離 = 1 + 1 = 2 公尺。【避坑提醒】看清題目是問「人到鏡子」還是「人到像」，人到像距離是物距的 2 倍！"}, {"id": 125, "chapter": "4-2 光的反射與面鏡成像", "question": "小明站在平面鏡前，若他往後退了 2 公尺（遠離平面鏡），則鏡中像的大小會有何變化？", "options": {"A": "像的大小完全不變", "B": "像變小", "C": "像變大", "D": "像先變大後變小"}, "answer": "A", "level": "基礎", "concept": "平面鏡中像的實際大小與距離無關", "explanation": "【解析】平面鏡所成的像永遠與物體等大。人退後時，雖然眼睛看遠處物體的視角變小造成「視覺上感覺縮小」，但鏡中像的物理實際大小「完全維持不變」。【避坑提醒】段考高頻考點！視覺視角縮小 ≠ 像的實際物理大小改變！"}, {"id": 126, "chapter": "4-2 光的反射與面鏡成像", "question": "在山區狹窄彎道的路旁，常設立大圓形的金屬「凸面鏡」，其主要目的為何？", "options": {"A": "會聚陽光提供照明", "B": "使像縮小以擴大駕駛的觀察視野", "C": "使對向來車成正立放大實像", "D": "將來車的聲音放大"}, "answer": "B", "level": "基礎", "concept": "凸面鏡的生活應用：發散光線、縮小成象以擴大視野", "explanation": "【解析】凸面鏡對光線有「發散」作用，永遠成正立縮小的虛像。將廣闊範圍的光線折向人眼，具有顯著「擴大視野」的效果，讓駕駛看見彎道死角。【避坑提醒】道路轉彎鏡、車輛後視鏡皆利用凸面鏡「擴大視野」的特性。"}, {"id": 127, "chapter": "4-2 光的反射與面鏡成像", "question": "手電筒或汽車車頭大燈的反射罩，通常會使用下列哪一種面鏡，並將燈泡置於其焦點處以產生強烈平行的前射光束？", "options": {"A": "平面鏡", "B": "凸面鏡", "C": "凹面鏡", "D": "三稜鏡"}, "answer": "C", "level": "基礎", "concept": "凹面鏡之聚光特性與焦點應用", "explanation": "【解析】凹面鏡能「會聚光線」。根據光路可逆原理，當點光源放在凹面鏡的焦點上時，射出的光線經凹面鏡反射後會平行射出，形成集中強烈的光束。【避坑提醒】車前燈反射罩是「凹面鏡」，不是凸面鏡！"}, {"id": 128, "chapter": "4-2 光的反射與面鏡成像", "question": "光線照射在極為粗糙的黑板表面時，光線向四面八方散射，使教室各個角度的同學都能看清楚黑板上的字。這種反射稱為什麼？", "options": {"A": "全反射", "B": "單向反射（鏡面反射）", "C": "折射", "D": "漫反射"}, "answer": "D", "level": "基礎", "concept": "漫反射的定義與現象", "explanation": "【解析】光線射到粗糙不平的表面時，各點法線方向不同，導致反射光朝各個方向散開，稱為漫反射。【避坑提醒】漫反射讓各個方向的人都能看見物體，且漫反射依然遵守反射定律！"}, {"id": 129, "chapter": "4-2 光的反射與面鏡成像", "question": "關於「漫反射」是否遵守光的反射定律，下列敘述何者正確？", "options": {"A": "漫反射中每一條光線在各個微小碰撞點依然嚴格遵守反射定律", "B": "漫反射不遵守反射定律，因為表面不平", "C": "漫反射只有一半的光線遵守反射定律", "D": "漫反射屬於光的折射現象，與反射定律無關"}, "answer": "A", "level": "基礎", "concept": "漫反射在微觀上每一點皆嚴格遵守反射定律", "explanation": "【解析】雖然反射面整體粗糙，但在微觀上光線照射的每一個微小切面，其入射線、反射線與法線依然都在同一平面上，且入射角等於反射角。【避坑提醒】極常考觀念！漫反射依然完全遵守反射定律！"}, {"id": 130, "chapter": "4-2 光的反射與面鏡成像", "question": "當一束平行光垂直入射到平整的平面鏡表面時（即入射線與鏡面夾角為 90°），此時的入射角為多少度？", "options": {"A": "45°", "B": "0°", "C": "90°", "D": "180°"}, "answer": "B", "level": "基礎", "concept": "垂直入射時入射角為 0 度", "explanation": "【解析】垂直鏡面入射時，光線與法線重合，因此入射光線與法線的夾角為 0°，入射角 = 0°，反射光線沿原路反向射回。【避坑提醒】千萬不要把 90° 當成入射角！垂直入射入射角是 0°。"}, {"id": 131, "chapter": "4-2 光的反射與面鏡成像", "question": "當我們面對平面鏡舉起自己的「右手」時，鏡中的像看起來像是在舉起哪一隻手？", "options": {"A": "右手", "B": "雙手一起舉起", "C": "左手", "D": "不一定，視距離而定"}, "answer": "C", "level": "基礎", "concept": "平面鏡對稱成像造成左右對調之視覺感知", "explanation": "【解析】平面鏡成像與物體呈鏡面對稱。當你舉起右手時，對著鏡中人看，其舉起的是其自身的「左手」。【避坑提醒】新課綱特別強調這本質是「鏡面對稱（前後對稱）」，大腦解讀為左右對調。"}, {"id": 132, "chapter": "4-2 光的反射與面鏡成像", "question": "牙醫診視病患牙齒內部時，常使用一種小圓柄面鏡。若牙醫將面鏡「極為貼近」牙齒背面觀察，希望能看到正立放大的牙齒影像，該面鏡應使用何者？", "options": {"A": "平面鏡", "B": "凸透鏡", "C": "凸面鏡", "D": "凹面鏡"}, "answer": "D", "level": "基礎", "concept": "凹面鏡在焦點內成正立放大虛像之應用", "explanation": "【解析】當物體位於凹面鏡的焦點以內（極近距離）時，凹面鏡能形成正立、放大的虛像，牙醫以此看清細部牙垢；化妝鏡亦同理。【避坑提醒】凹面鏡近看放大人臉，凸面鏡永遠縮小。"}, {"id": 133, "chapter": "4-2 光的反射與面鏡成像", "question": "救護車前方車頭噴塗的「AMBULANCE」英文字樣，通常會印成鏡像反轉的字體，其主要科學目的為何？", "options": {"A": "讓前方車輛的司機從後照鏡（平面鏡）中能看到正向易讀的字", "B": "為了美觀獨特的設計風格", "C": "符合國際通用的防偽標準", "D": "讓行人看見時產生警惕感"}, "answer": "A", "level": "基礎", "concept": "平面鏡鏡像對稱在救護車字體之應用", "explanation": "【解析】前方車輛駕駛透過後照鏡觀察後方時，鏡子會使左右對稱翻轉。車頭預先反印字體，反射後恰好翻正為正常字樣，方便駕駛第一時間禮讓。【避坑提醒】生活情境經典應用，考查平面鏡左右對稱性。"}, {"id": 134, "chapter": "4-2 光的反射與面鏡成像", "question": "若平面鏡前的物體以 5 公分/秒的速率垂直向鏡面靠近，則鏡中的像相對於物體，是以多少速率在靠近？", "options": {"A": "2.5 公分/秒", "B": "10 公分/秒", "C": "5 公分/秒", "D": "0 公分/秒"}, "answer": "B", "level": "基礎", "concept": "物與像之相對運動速率關係", "explanation": "【解析】物體向鏡面靠近 5 cm/s，像也同時以 5 cm/s 向鏡面靠近。因此兩者之間的相對接近速率為 5 + 5 = 10 公分/秒。【避坑提醒】看清題目問的是「像相對於鏡面（5 cm/s）」還是「像相對於物體（10 cm/s）」！"}, {"id": 135, "chapter": "4-2 光的反射與面鏡成像", "question": "下列哪一種面鏡所成的像，永遠都是「正立、縮小的虛像」？", "options": {"A": "平面鏡", "B": "凹面鏡", "C": "凸面鏡", "D": "雙凸透鏡"}, "answer": "C", "level": "基礎", "concept": "凸面鏡成像之唯一性質", "explanation": "【解析】凸面鏡對任何距離的物體，所反射折回的光線皆是發散的，其虛像永遠落在鏡後焦點以內，性質恆為「正立、縮小、虛像」。【避坑提醒】凸面鏡與凹透鏡性質極為相似，皆永遠成正立縮小虛像。"}, {"id": 136, "chapter": "4-2 光的反射與面鏡成像", "question": "小明站在垂直牆壁上的平面鏡前看著鏡子，鏡子長度為 80 公分。若小明希望能從鏡中看見自己「完整的全身像」，則該平面鏡的長度至少必須為小明身高的多少倍？", "options": {"A": "1/4 倍", "B": "2 倍", "C": "等長（1 倍）", "D": "1/2 倍"}, "answer": "D", "level": "中等", "concept": "全身平面鏡最小長度為身高的一半", "explanation": "【解析】根據光反射定律形成的相似三角形原理，人眼看鏡中頭頂與腳底的反射光線，鏡面長度恰好需涵蓋人眼到頭頂的一半加上人眼到腳底的一半，總長剛好是身高的 1/2。【避坑提醒】鏡長只需身高的一半，且人往後退並不會讓你看到更多身體部位！"}, {"id": 137, "chapter": "4-2 光的反射與面鏡成像", "question": "牆上掛著一個指針式時鐘，若在時鐘對面的平面鏡中看見時鐘指針顯示為「3 點 20 分」，則此時時鐘的「實際真實時間」應為何？", "options": {"A": "8 點 40 分", "B": "9 點 20 分", "C": "9 點 40 分", "D": "3 點 40 分"}, "answer": "A", "level": "中等", "concept": "平面鏡時鐘對稱判讀運算法則", "explanation": "【解析】平面鏡呈垂直軸左右對稱，最快速解法是用「12 點（即 11 點 60 分）」減去鏡中時間：11 點 60 分 - 3 點 20 分 = 8 點 40 分。【避坑提醒】時鐘鏡中讀數直接用 11:60 相減，既快又絕不出錯！"}, {"id": 138, "chapter": "4-2 光的反射與面鏡成像", "question": "一束入射光線射向水平放置的平面鏡，入射角為 40°。若保持入射光線方向固定不變，將平面鏡順時針旋轉 10°，則反射光線會偏轉多少度？", "options": {"A": "10°", "B": "20°", "C": "30°", "D": "40°"}, "answer": "B", "level": "中等", "concept": "平面鏡旋轉 θ 角反射光線偏轉 2θ 角規律", "explanation": "【解析】當鏡面旋轉 θ 角時，法線也隨之旋轉 θ 角，使得入射角增加 θ，反射角也必須增加 θ，因此反射光線總共偏轉了 2θ 角。10° × 2 = 20°。【避坑提醒】鏡子轉 θ，反射光線轉 2θ，這是光學槓桿的基本公式。"}, {"id": 139, "chapter": "4-2 光的反射與面鏡成像", "question": "兩片平面鏡以 90° 夾角垂直相交放置。若一物體置於兩鏡之間，觀察者在鏡中最多可看到幾個物體的像？", "options": {"A": "1 個", "B": "2 個", "C": "3 個", "D": "4 個"}, "answer": "C", "level": "中等", "concept": "兩平面鏡夾角成像個數公式 N = 360/θ - 1", "explanation": "【解析】兩鏡夾角成像公式為：像數 N = (360° / 夾角) - 1。夾角為 90° 時，N = (360 / 90) - 1 = 4 - 1 = 3 個像（兩面鏡各成一次像，加上兩次反射重疊的一個像）。【避坑提醒】扣掉的 1 是物體本身，不要忘記減 1！"}, {"id": 140, "chapter": "4-2 光的反射與面鏡成像", "question": "小明在白紙上寫下英文字母「b」，然後將紙垂直立在平面鏡前。小明在鏡中看到的像會呈現哪一個英文字母的形狀？", "options": {"A": "b", "B": "q", "C": "p", "D": "d"}, "answer": "D", "level": "中等", "concept": "平面鏡左右對稱反轉之字形判斷", "explanation": "【解析】直立面對平面鏡時，像是左右對稱反轉的。字母「b」左右翻轉後，圓弧由右側轉到左側，形成字母「d」。【避坑提醒】上下不翻轉（正立），只有左右鏡像反轉，故 b 變成 d 而非 p 或 q。"}, {"id": 141, "chapter": "4-2 光的反射與面鏡成像", "question": "一束雷射光水平射向平面鏡，入射角為 45°。若要使反射光線與入射光線之間的夾角縮小為 60°，應如何調整入射角？", "options": {"A": "將入射角減小為 30°", "B": "將入射角增加到 60°", "C": "將入射角減小為 15°", "D": "將入射角增加到 50°"}, "answer": "A", "level": "中等", "concept": "反射光線與入射光線夾角為 2 倍入射角", "explanation": "【解析】入射線與反射線之間的夾角等於「入射角 + 反射角 = 2 × 入射角」。若夾角要變成 60°，則入射角必須調整為 60° / 2 = 30°。【避坑提醒】光線間夾角是 2θ，要看清題目是問「入射角」還是「光線夾角」。"}, {"id": 142, "chapter": "4-2 光的反射與面鏡成像", "question": "在雨夜駕車時，迎面而來的車燈光照射在「平整積水」的柏油路面上，常使駕駛感到嚴重眩光刺眼；反之在乾爽粗糙的柏油路面上則較不刺眼。其原因為何？", "options": {"A": "積水路面吸收了所有的光線", "B": "平整積水路面產生強烈的鏡面反射，乾爽路面產生漫反射", "C": "積水路面使光線發生了色散", "D": "水把光速加快導致能量變強"}, "answer": "B", "level": "中等", "concept": "鏡面反射與漫反射在生活行車安全之對比", "explanation": "【解析】水填平了柏油路的凹凸，形成平滑水面，光線集中朝單一方向反射（鏡面反射）射入駕駛眼睛造成眩光；乾燥粗糙路面產生漫反射，光線均勻分散故不刺眼。【避坑提醒】平滑表面鏡面反射易眩光刺眼。"}, {"id": 143, "chapter": "4-2 光的反射與面鏡成像", "question": "小華坐在理髮店的椅子上，正前方有一面大平面鏡，正後方 1 公尺處也有一面大平面鏡。小華距離正前方的平面鏡 2 公尺。小華在正前方鏡中看到的「第一個後腦勺的像」，距離小華本人多遠？", "options": {"A": "3 公尺", "B": "4 公尺", "C": "6 公尺", "D": "5 公尺"}, "answer": "C", "level": "中等", "concept": "前後雙鏡多次反射成像距離計算", "explanation": "【解析】小華後方的鏡子先成小華後腦勺的像（物距 1 公尺，像在後鏡後方 1 公尺處）。該像相對於前鏡的物距為：1（像到後鏡）+ 1（後鏡到小華）+ 2（小華到前鏡）= 4 公尺。前鏡再將此像反射，像在前鏡後方 4 公尺處。因此小華到此像的距離 = 2（小華到前鏡）+ 4（前鏡到像）= 6 公尺。【避坑提醒】理髮廳多重成像距離題，一步步推導虛像位置即可迎刃而解。"}, {"id": 144, "chapter": "4-2 光的反射與面鏡成像", "question": "小明身高 180 公分，眼睛距離頭頂 10 公分。若他要在平面鏡中看到自己頭頂到腳趾的全身像，平面鏡底端離地面的高度最高「不可超過」多少公分？", "options": {"A": "100 公分", "B": "90 公分", "C": "95 公分", "D": "85 公分"}, "answer": "D", "level": "中等", "concept": "全身鏡懸掛高度範圍計算", "explanation": "【解析】人眼高度為 180 - 10 = 170 公分。人眼看腳趾的光線射到鏡子反射，反射點高度為腳（0 cm）與眼睛（170 cm）的正中間，即 170 / 2 = 85 公分。因此鏡子下緣最高不能超過 85 公分，否則看不到腳。【避坑提醒】全身鏡下緣高度 = 眼睛高度的一半。"}, {"id": 145, "chapter": "4-2 光的反射與面鏡成像", "question": "太陽灶（太陽能烤爐）是利用下列哪一種面鏡將太陽光會聚在焦點上，產生高溫來烹煮食物？", "options": {"A": "凹面鏡", "B": "凸面鏡", "C": "平面鏡", "D": "雙凹透鏡"}, "answer": "A", "level": "中等", "concept": "凹面鏡聚光生熱之工程應用", "explanation": "【解析】太陽距離地球極遠，陽光可視為平行光束。凹面鏡能將平行的太陽光全部反射會聚於焦點，在焦點處產生極高能量與溫度，故太陽能鍋具皆採用大型凹面鏡。【避坑提醒】會聚光線的面鏡是凹面鏡，凸面鏡是發散光線。"}, {"id": 146, "chapter": "4-2 光的反射與面鏡成像", "question": "甲、乙、丙三束光線射向同一個平面鏡，測得甲光線與鏡面夾角為 20°，乙光線與法線夾角為 50°，丙光線垂直鏡面入射。則哪一束光線的「反射角最大」？", "options": {"A": "乙光線", "B": "甲光線", "C": "丙光線", "D": "三者一樣大"}, "answer": "B", "level": "中等", "concept": "多光線入射角求反射角之綜合比較", "explanation": "【解析】甲與鏡面夾角 20°，入射角 = 90° - 20° = 70°，反射角 = 70°；乙與法線夾角 50°，入射角 = 50°，反射角 = 50°；丙垂直入射，入射角 = 0°，反射角 = 0°。故甲的反射角最大。【避坑提醒】注意分辨「與鏡面夾角」和「與法線夾角」，兩者互餘。"}, {"id": 147, "chapter": "4-2 光的反射與面鏡成像", "question": "潛望鏡內部安裝了兩片平面鏡，若想讓水面下的潛艇人員看見水面上的景物，這兩片平面鏡的擺放方式應該為何？", "options": {"A": "兩鏡互相平行，且均與管壁夾 90° 角", "B": "兩鏡互相垂直，且均與管壁夾 45° 角", "C": "兩鏡互相平行，且均與管壁夾 45° 角", "D": "兩鏡以 60° 夾角相交"}, "answer": "C", "level": "中等", "concept": "簡易潛望鏡的光路設計（兩面平行 45 度平面鏡）", "explanation": "【解析】光線水平射入上方平面鏡（入射角 45°）反射向下偏折 90°，再射入下方平行的平面鏡（入射角 45°）反射再度偏折 90° 轉為水平進入人眼，且兩次反射後上下與左右皆恢復正常方向。【避坑提醒】潛望鏡兩片鏡子互相平行且各呈 45 度角。"}, {"id": 148, "chapter": "4-2 光的反射與面鏡成像", "question": "在暗室中，將一平面鏡平放在桌上，用手電筒斜斜照射在平面鏡上。如果從側面觀察（非反射光線直射方向），會發現桌子看起來比鏡子還要亮，這是因為何種反射？", "options": {"A": "桌面發射出螢光", "B": "桌面發生鏡面反射，鏡面發生漫反射", "C": "鏡子把所有的光線吸收了", "D": "鏡面發生鏡面反射，光集中射向前方；桌面發生漫反射，有光射入側面的人眼"}, "answer": "D", "level": "中等", "concept": "暗室中鏡面反射與漫反射的視覺明暗對比", "explanation": "【解析】手電筒光照在平滑鏡面產生鏡面反射，光線集中射往特定方向，側面的眼睛接收不到反射光，故鏡子看起來很暗；桌面粗糙產生漫反射，各方向皆有光射入人眼，故桌面看起來較亮。【避坑提醒】經典名題！鏡面反射從旁看是暗的，正對反射方向看才是極亮！"}, {"id": 149, "chapter": "4-2 光的反射與面鏡成像", "question": "一輛汽車的右側後視鏡通常採用凸面鏡。當駕駛從後視鏡中看見後方有一輛機車時，下列敘述何者正確？", "options": {"A": "機車在鏡中呈現的是正立縮小的虛像", "B": "後視鏡看到的機車比實際距離看起來更近", "C": "機車在鏡中呈現的是倒立縮小的實像", "D": "後視鏡的成像範圍比同尺寸的平面鏡還要小"}, "answer": "A", "level": "中等", "concept": "凸面鏡後視鏡成像特徵與警語意涵", "explanation": "【解析】凸面鏡永遠成正立縮小虛像。因為像被縮小了，駕駛常會誤以為機車距離還很遠（警語：Objects in mirror are closer than they appear），但凸面鏡大幅擴展了視野。【避坑提醒】凸面鏡是縮小虛像，視野大，但看起來會感覺比實際遠。"}, {"id": 150, "chapter": "4-2 光的反射與面鏡成像", "question": "某位學生面向正北方站立在平面鏡前，他向鏡子跨出一大步（向北走）。則鏡中的像運動方向為何？", "options": {"A": "向北移動", "B": "向南移動", "C": "向東移動", "D": "向西移動"}, "answer": "B", "level": "中等", "concept": "空間方位座標下的平面鏡運動對稱性", "explanation": "【解析】學生面向北，鏡子在他北方。學生向北跨步靠近鏡子，鏡中的像也必須向鏡子靠近。由鏡子往南方走才是靠近鏡子，因此像的運動方向是向「南」。【避坑提醒】人在空間中向北走，對稱的像在空間中向南走！方位題要小心空間座標。"}, {"id": 151, "chapter": "4-3 光的折射", "question": "光線由空氣斜向射入水中時，傳播方向會發生偏折，這種現象稱為什麼？", "options": {"A": "反射", "B": "色散", "C": "折射", "D": "全反射"}, "answer": "C", "level": "基礎", "concept": "折射現象之基本定義", "explanation": "【解析】光線從一種介質斜向進入另一種介質時，在兩介質交界面上傳播方向發生改變的現象稱為「折射」。【避坑提醒】反射是彈回原介質，折射是進入另一種新介質。"}, {"id": 152, "chapter": "4-3 光的折射", "question": "光從一種介質進入另一種介質時，之所以會發生偏折（折射），其最根本的物理原因為何？", "options": {"A": "光被介質吸收了大量能量", "B": "光在不同介質中的顏色會改變", "C": "兩種介質的表面過於平滑", "D": "光在不同介質中的傳播速率不同"}, "answer": "D", "level": "基礎", "concept": "光的折射成因：光在不同介質中光速不同", "explanation": "【解析】光在不同物質中傳播速率不同（如空氣中快、水中慢）。當光線斜向射入時，波前不同部位減速的時間不同步，導致整體傳播方向發生轉折。【避坑提醒】「光速改變」是折射發生的根本原因！"}, {"id": 153, "chapter": "4-3 光的折射", "question": "當光線從「空氣」斜向射入「水」中時，折射光線的偏折方向為何？", "options": {"A": "偏向法線，折射角小於入射角", "B": "偏離法線，折射角大於入射角", "C": "沿原方向直進，完全不偏折", "D": "反射回空氣中"}, "answer": "A", "level": "基礎", "concept": "光由快介質射入慢介質偏向法線", "explanation": "【解析】空氣光速快、水光速慢。光從「快介質進入慢介質」時，折射光會「偏向法線」，此時折射角必定小於入射角。【避坑提醒】口訣：「快入慢，偏向法線，角變小」！"}, {"id": 154, "chapter": "4-3 光的折射", "question": "當光線從「水」斜向射出進入「空氣」中時，折射光線的偏折方向為何？", "options": {"A": "偏向法線，折射角小於入射角", "B": "偏離法線，折射角大於入射角", "C": "方向隨機改變", "D": "不發生偏折"}, "answer": "B", "level": "基礎", "concept": "光由慢介質射入快介質偏離法線", "explanation": "【解析】光從「慢介質（水）進入快介質（空氣）」時，速度變快，折射光會「偏離法線」，此時折射角大於入射角。【避坑提醒】口訣：「慢入快，偏離法線，角變大」！"}, {"id": 155, "chapter": "4-3 光的折射", "question": "當一束光線「垂直」射向平靜的水面（入射角為 0°）進入水中時，下列敘述何者正確？", "options": {"A": "光的傳播方向偏向法線", "B": "光的傳播方向偏離法線", "C": "光的傳播方向沿直線前進不偏折，但光速減慢", "D": "光線會被完全反射回空氣中"}, "answer": "C", "level": "基礎", "concept": "垂直入射不偏折但光速依然改變", "explanation": "【解析】垂直交界面入射時，入射角為 0°，折射角亦為 0°，光傳播方向不發生偏折；但由於介質改變，光在水中的傳播速率依然會減慢。【避坑提醒】「方向不偏折」不代表「沒有折射」，光速依然變慢了！"}, {"id": 156, "chapter": "4-3 光的折射", "question": "將一枝筆直的筷子斜斜插入盛水的透明玻璃杯中，從水面上方觀察，會發現筷子在水面交界處看起來如何？", "options": {"A": "筷子看似向下折斷且變細", "B": "筷子變成兩條平行的筷子", "C": "筷子完全消失不見", "D": "筷子看似在水面處向上折起且略微變粗"}, "answer": "D", "level": "基礎", "concept": "筷子在水中折射虛像之巨觀特徵", "explanation": "【解析】水中筷子反射的光線從水中射入空氣時偏離法線，人眼逆著折射光線看回去，看到的是偏高的虛像，使筷子看起來像向上折斷；同時圓柱形水杯具凸透鏡效果使筷子略變粗。【避坑提醒】筷子是「向上彎折（變淺）」，不要選向下折。"}, {"id": 157, "chapter": "4-3 光的折射", "question": "在碗底放一枚硬幣，慢慢後退到剛好看不見硬幣的位置。此時若向碗中緩緩加水，神奇的是原本看不見的硬幣又重新出現在視線中，這是因為何種現象？", "options": {"A": "光線從水射入空氣時發生折射，使硬幣的虛像位置上升", "B": "硬幣受浮力浮上水面", "C": "水把硬幣溶解放大了", "D": "碗底發生了鏡面反射"}, "answer": "A", "level": "基礎", "concept": "碗底加水硬幣浮現之折射原理", "explanation": "【解析】硬幣反射的光線由水進入空氣時偏離法線折向眼睛，逆向延長線所成的「虛像」比硬幣真實位置來得高，因而越過碗邊阻礙進入人眼。【避坑提醒】加水硬幣浮現是經典折射實驗，硬幣本體沒動，是「像變高了」。"}, {"id": 158, "chapter": "4-3 光的折射", "question": "原住民獵人站在溪邊清澈的淺水中準備用魚叉刺魚。獵人若想準確刺中水中的魚，他的魚叉應該瞄準哪裡？", "options": {"A": "眼睛看到的魚的「正中央」", "B": "眼睛看到的魚的「略偏下方」", "C": "眼睛看到的魚的「正上方」", "D": "隨意亂刺即可"}, "answer": "B", "level": "基礎", "concept": "折射使水中物體虛像偏淺，叉魚需瞄準下方", "explanation": "【解析】水中的魚反射的光由水射向空氣時偏離法線折入眼睛，人眼看到的魚是偏高的「虛像」（比實際位置淺）。魚的真實位置在虛像的「下方」，故必須瞄準眼睛看到的魚的下方投擲。【避坑提醒】看魚在上面，真魚在下面，所以叉魚要「瞄準下方」！"}, {"id": 159, "chapter": "4-3 光的折射", "question": "去游泳池游泳時，站在岸上看清澈的池底，池底的深度感覺比實際的深度如何？", "options": {"A": "與實際深度完全一樣", "B": "比實際深度「深」", "C": "比實際深度「淺」", "D": "時深時淺無法判斷"}, "answer": "C", "level": "基礎", "concept": "池水看似較淺（視深小於實深）的生活危險性", "explanation": "【解析】池底光線出水面時折射偏離法線，在人眼看來池底整體上升，感覺水深較淺（視深約為真實深度的 3/4）。【避坑提醒】池水看似淺其實很深，容易造成溺水危險！"}, {"id": 160, "chapter": "4-3 光的折射", "question": "一束雷射光由空氣斜向射入一塊厚平行的透明玻璃磚中，折射角為 r，入射角為 i。下列大小關係何者正確？", "options": {"A": "i < r", "B": "無法比較", "C": "i = r", "D": "i > r"}, "answer": "D", "level": "基礎", "concept": "空氣射入玻璃折射角小於入射角", "explanation": "【解析】玻璃中的光速小於空氣中的光速。由快介質射入慢介質，折射光偏向法線，故折射角 r 小於入射角 i（即 i > r）。【避坑提醒】在較慢的介質中，光線與法線的夾角一定比較小。"}, {"id": 161, "chapter": "4-3 光的折射", "question": "一束單色光從空氣射入平行玻璃磚，穿過玻璃磚後再度射出進入空氣。下列關於出射光線與原始入射光線的關係，何者正確？", "options": {"A": "出射光線與入射光線互相平行，但位置產生側向平移", "B": "出射光線與入射光線垂直", "C": "出射光線朝法線大幅偏折形成聚集", "D": "出射光線完全沿原直線前進，沒有任何平移"}, "answer": "A", "level": "中等", "concept": "平行玻璃磚之兩次折射（側移但平行）", "explanation": "【解析】光進入玻璃時偏向法線，由玻璃出射進入空氣時偏離法線，由於兩介質交界面互相平行，出射角恰等於最初的入射角，因此出射光線與入射光線「互相平行」，僅產生一段平行位移（側移）。【避坑提醒】平行厚玻璃板折射後「方向平行，位置側移」。"}, {"id": 162, "chapter": "4-3 光的折射", "question": "在清晨日出與黃昏日落時，由於地球大氣層的密度由外太空向地面逐漸增厚，陽光在大氣中發生連續折射彎曲。這導致我們觀察到的日出與日落時間有何變化？", "options": {"A": "日出時間比實際延後看到，日落時間比實際提早消失", "B": "日出時間比實際提早看到，日落時間比實際延後消失", "C": "日出與日落時間完全不受大氣折射影響", "D": "白天時間整體變短"}, "answer": "B", "level": "中等", "concept": "大氣折射使天體視覺高度上升（日出早、日落晚）", "explanation": "【解析】大氣折射使光線向下彎曲，當地平線下方的太陽光射入大氣折向地面時，人眼逆著光線看去，看到的像是升高的虛像。因此太陽尚未升上地平線時我們就先看到了（提早日出），落入地平線後依然看得到（延後日落）。【避坑提醒】大氣折射讓地球的白晝整體時間變長了幾分鐘！"}, {"id": 163, "chapter": "4-3 光的折射", "question": "夏天在烈日曝曬下的柏油路面上，遠處看似有一灘平靜的水面倒映著天空和車輛，但走近時卻發現地面乾爽無比，此現象稱為「下蜃景（海市蜃樓）」。其形成原因為何？", "options": {"A": "柏油路面被曬融化產生了鏡面反射", "B": "太陽光發生了劇烈色散", "C": "靠近地表的熱空氣密度小、光速較快，使天空的光線發生折射向上彎曲進入人眼", "D": "空氣中水分蒸發形成小雨滴產生全反射"}, "answer": "C", "level": "中等", "concept": "海市蜃樓之溫度梯度空氣折射原理", "explanation": "【解析】地面炙熱使貼近地表空氣溫度極高、密度小，光速較上層冷空氣快。天空射下的光由冷空氣（慢）射向熱空氣（快）時不斷偏離法線，最終折射向上彎入人眼，大腦誤以為是地面水窪的倒影。【避坑提醒】海市蜃樓是「光在不同溫度空氣中的連續折射」，不是反射！"}, {"id": 164, "chapter": "4-3 光的折射", "question": "一隻潛在水中的魚看岸上樹上的小鳥，與小鳥實際所在的位置相比，魚所看到的小鳥影像位置會如何？", "options": {"A": "在水底倒立呈現", "B": "比實際位置「更低」", "C": "在同一高度完全不變", "D": "比實際位置「更高」"}, "answer": "D", "level": "中等", "concept": "從水中看空氣中物體（像比實物更高）", "explanation": "【解析】小鳥反射的光由空氣射入水中（快入慢，偏向法線）。魚在水中逆著折射光線看回去，延長線交會點位於小鳥真實位置的上方，因此魚看鳥會覺得鳥「變高了」。【避坑提醒】常考對稱考點：人看水中物體變淺（變高），水看空中物體也「變高」！"}, {"id": 165, "chapter": "4-3 光的折射", "question": "一束光線由介質 A 斜向射入介質 B，測得入射角為 45°，折射角為 60°。根據此數據，下列關於介質 A 與介質 B 中光速的比較，何者正確？", "options": {"A": "光在介質 A 中的速率小於介質 B", "B": "光在介質 A 中的速率大於介質 B", "C": "光在兩介質中的傳播速率完全相等", "D": "無法藉由角度比較光速快慢"}, "answer": "A", "level": "中等", "concept": "由入射角與折射角大小反推光速快慢", "explanation": "【解析】入射角 45°，折射角 60°，折射角大於入射角，表示光線「偏離法線」。光由慢介質進入快介質才會偏離法線，因此介質 A 為慢介質、介質 B 為快介質，即 vA < vB。【避坑提醒】角度大＝速度快！角大在 B，故 B 的光速快！"}, {"id": 166, "chapter": "4-3 光的折射", "question": "厚玻璃杯底盛有水，由杯口正上方垂直向下看杯底的一顆玻璃珠。玻璃珠看起來的高度會有何變化？", "options": {"A": "看起來比實際位置更深", "B": "看起來比實際位置偏高（向上浮起）", "C": "看起來位置完全沒有任何改變", "D": "在水面上形成倒立的實像"}, "answer": "B", "level": "中等", "concept": "正上方觀察之視深浮起效應", "explanation": "【解析】即使是正上方俯視，從玻璃珠射出的微小張角光線在穿過水面進入空氣時依然偏離法線散開，逆向延長線交會在真實深度上方，因此看起來珠子「向上浮起（變淺）」。【避坑提醒】凡是人眼隔著水或玻璃看物體，物體看起來皆會「變淺/浮起」。"}, {"id": 167, "chapter": "4-3 光的折射", "question": "將一塊半圓形透明玻璃磚平放在白紙上，一束雷射光由空氣朝圓心 O 點斜向射入半圓形平面側，此時下列何者正確？", "options": {"A": "光線在圓心 O 處無法穿透", "B": "在圓弧面射出時會再度大幅偏折", "C": "在圓弧面射出時不會再度發生偏折，因為光線沿著法線方向垂直穿出", "D": "光線在玻璃內速率保持與空氣相同"}, "answer": "C", "level": "中等", "concept": "半圓形玻璃磚之圓心入射幾何特徵", "explanation": "【解析】光在平面側發生第一次折射進入玻璃；當光線由圓心射向圓弧邊界時，因光線沿半徑方向前進，半徑垂直於切線（即法線），入射角為 0°，故在圓弧面出射時「方向不發生偏折」。【避坑提醒】沿半徑射出圓弧面時垂直入射，不發生偏折！"}, {"id": 168, "chapter": "4-3 光的折射", "question": "光纖通訊（光導纖維）技術之所以能將光訊號在細長的玻璃纖維內部高速傳遞且幾乎不漏光，主要是利用了光的何種現象？", "options": {"A": "光的色散與吸收", "B": "光在纖維中的連續折射發散", "C": "光在真空中的直線前進", "D": "光在纖維管壁發生的連續全反射"}, "answer": "D", "level": "中等", "concept": "光纖通訊利用全反射原理", "explanation": "【解析】光線從高折射率玻璃纖維內部（光速慢）射向低折射率外包層（光速快）時，只要入射角大於臨界角，光線就會在界面發生 100% 的「全反射」，將光訊號牢牢鎖在光纖內傳播。【避坑提醒】光纖是利用「全反射」，本質是折射的極限現象。"}, {"id": 169, "chapter": "4-3 光的折射", "question": "如圖所示，一束光線由水射入空氣中，入射角逐漸增大。當入射角增大到某個特定角度時，折射角剛好達到 90°（沿著水面射出），此特定入射角稱為什麼？", "options": {"A": "臨界角", "B": "極限偏折角", "C": "反射角", "D": "會聚角"}, "answer": "A", "level": "中等", "concept": "全反射之臨界角定義", "explanation": "【解析】當光從慢介質進入快介質時，折射角大於入射角。當折射角恰等於 90° 時的入射角稱為「臨界角」；若入射角大於臨界角，折射光完全消失，全數反射回水中，稱為全反射。【避坑提醒】慢介質射入快介質且入射角大於臨界角，才會發生全反射。"}, {"id": 170, "chapter": "4-3 光的折射", "question": "某位學生將一塊透明壓克力長方磚壓在一張印有直線的紙上。從斜上方透過壓克力磚觀察這條直線，會發現壓克力磚底下的直線看起來好像錯位中斷了。這是因為下列何者？", "options": {"A": "壓克力磚吸收了部分光線", "B": "直線反射的光線穿透壓克力磚進入空氣時發生折射", "C": "壓克力磚內部發生了色散", "D": "紙張上的直線被壓克力磚壓扁形變"}, "answer": "B", "level": "中等", "concept": "透光厚磚折射產生錯位視覺", "explanation": "【解析】直線反射的光透過厚壓克力磚斜向射入空氣時，發生兩次折射產生側向平移，使人眼看到的虛像位置產生偏移，看起來如同錯位中斷。【避坑提醒】透過厚玻璃磚看線條錯位是折射側移的經典展示。"}, {"id": 171, "chapter": "4-4 透鏡成像", "question": "中央部分比邊緣厚的透鏡稱為「凸透鏡」，當一束平行主軸的光線射入凸透鏡時，折射後的光線會有何特性？", "options": {"A": "向外發散開來", "B": "完全反射回原處", "C": "向內會聚於焦點", "D": "光線方向完全不變"}, "answer": "C", "level": "基礎", "concept": "凸透鏡對光線具有會聚作用", "explanation": "【解析】凸透鏡（中央厚邊緣薄）對光線具有「會聚作用」，平行於主軸入射的光線經折射後會向內偏折，交會於另一側的「焦點」。【避坑提醒】凸透鏡會聚光線，凹透鏡發散光線。"}, {"id": 172, "chapter": "4-4 透鏡成像", "question": "中央部分比邊緣薄的透鏡稱為「凹透鏡」，不論物體放置在凹透鏡前多遠的位置，透過凹透鏡所看到的像永遠具有何種性質？", "options": {"A": "倒立放大的實像", "B": "倒立縮小的實像", "C": "正立放大的虛像", "D": "正立縮小的虛像"}, "answer": "D", "level": "基礎", "concept": "凹透鏡永遠成正立縮小虛像", "explanation": "【解析】凹透鏡對光線有發散作用，折射光線無法交會成實像。其反向延長線交於物體同側，所成的像「永遠都是正立、縮小的虛像」。【避坑提醒】牢記：凹透鏡與凸面鏡一樣，永遠成正立縮小虛像！"}, {"id": 173, "chapter": "4-4 透鏡成像", "question": "若想利用凸透鏡作為「放大鏡」來觀察郵票的微小細節，郵票應該放置在凸透鏡前的哪一個位置？", "options": {"A": "一倍焦距以內（u < f）", "B": "剛好在兩倍焦距上（u = 2f）", "C": "一倍焦距與兩倍焦距之間（f < u < 2f）", "D": "兩倍焦距之外（u > 2f）"}, "answer": "A", "level": "基礎", "concept": "放大鏡原理（物體置於焦距內）", "explanation": "【解析】凸透鏡要成「正立放大的虛像」（放大鏡功能），物體必須放置在「焦點以內（焦距內，u < f）」。【避坑提醒】物體如果在焦距外成的是倒立實像，必須在焦距內才是正立放大的放大鏡！"}, {"id": 174, "chapter": "4-4 透鏡成像", "question": "智慧型手機照相機的鏡頭主要是利用凸透鏡成像。被拍攝的人站在鏡頭遠處，此時在手機內部感光元件（如 CMOS）上所成的像之性質為何？", "options": {"A": "正立放大的虛像", "B": "倒立縮小的實像", "C": "倒立放大的實像", "D": "正立等大的實像"}, "answer": "B", "level": "基礎", "concept": "照相機成像性質（倒立縮小實像）", "explanation": "【解析】照相機是將遠處廣大的人或景物（物距 u > 2f）縮小投射在感光元件上，所成的像是「倒立、縮小、實像」。【避坑提醒】能在底片或感光元件上接收到的必定是「實像」，且照相機把大物體變小照片，故為縮小實像。"}, {"id": 175, "chapter": "4-4 透鏡成像", "question": "學校教室中使用的單槍投影機，將電腦螢幕上的教材畫面放大投射在遠處的大布幕上。此時投影片（或晶片光源）應放置在凸透鏡前的哪一個位置區間？", "options": {"A": "兩倍焦距之外（u > 2f）", "B": "剛好在兩倍焦距上（u = 2f）", "C": "一倍焦距到兩倍焦距之間（f < u < 2f）", "D": "一倍焦距以內（u < f）"}, "answer": "C", "level": "基礎", "concept": "投影機成像位置（物距介於 f 與 2f 之間）", "explanation": "【解析】投影機是在屏幕上成「倒立放大的實像」。凸透鏡要成放大的實像，物體必須位於「一倍焦距到兩倍焦距之間（f < u < 2f）」，像則落在 2f 之外。【避坑提醒】放大的實像在 f ~ 2f 之間，縮小的實像在 2f 之外。"}, {"id": 176, "chapter": "4-4 透鏡成像", "question": "若將一根點燃的蠟燭恰好放置在凸透鏡的「焦點（F 點）」上，則穿過凸透鏡的折射光線會有何表現？", "options": {"A": "光線在焦點處全部被透鏡吸收", "B": "在另一側兩倍焦距處成倒立等大實像", "C": "在透鏡同側成正立放大虛像", "D": "折射光線變成互相平行的光束，無法在任何屏幕上成像"}, "answer": "D", "level": "基礎", "concept": "物體置於焦點上不成像（折射成平行光）", "explanation": "【解析】根據光路可逆原理，從焦點發出的光線經凸透鏡折射後會轉變為平行主軸的光束，平行光無法交會，因此「不能成像」。【避坑提醒】焦點（u = f）是不成像的臨界點，是實像與虛像的分界線！"}, {"id": 177, "chapter": "4-4 透鏡成像", "question": "當物體放置在凸透鏡前「兩倍焦距（u = 2f）」的位置時，在透鏡另一側的紙屏上所成的像之性質為何？", "options": {"A": "倒立等大的實像", "B": "倒立放大的實像", "C": "倒立縮小的實像", "D": "正立放大的虛像"}, "answer": "A", "level": "基礎", "concept": "凸透鏡在 2f 處成倒立等大實像", "explanation": "【解析】當物距等於兩倍焦距（u = 2f）時，像距也恰好等於兩倍焦距（v = 2f），在紙屏上呈現「倒立、等大、實像」。【避坑提醒】2f 是像「由縮小轉為放大」的唯一等大分界點！"}, {"id": 178, "chapter": "4-4 透鏡成像", "question": "人類眼睛能看見物體，主要是眼球內哪一個構造扮演「凸透鏡」的角色，負責將光線會聚折射？", "options": {"A": "角膜", "B": "水晶體", "C": "視網膜", "D": "玻璃體"}, "answer": "B", "level": "基礎", "concept": "人體眼球水晶體相當於凸透鏡", "explanation": "【解析】水晶體中央厚、邊緣薄，相當於一個焦距可調節的凸透鏡，負責將外來光線折射會聚於視網膜上。【避坑提醒】水晶體＝凸透鏡，視網膜＝感光紙屏（屏幕）。"}, {"id": 179, "chapter": "4-4 透鏡成像", "question": "正常眼睛看物體時，外來光線經水晶體折射後，影像應該清晰聚焦在眼球的哪一個構造上？", "options": {"A": "瞳孔", "B": "虹膜", "C": "視網膜", "D": "盲點"}, "answer": "C", "level": "基礎", "concept": "影像聚焦於視網膜成倒立縮小實像", "explanation": "【解析】眼球水晶體折射光線，在視網膜（分佈滿感光細胞）上形成倒立、縮小的實像，神經訊號傳至大腦後感知為正立影像。【避坑提醒】視網膜扮演接收實像的屏幕角色。"}, {"id": 180, "chapter": "4-4 透鏡成像", "question": "近視眼的成因，是因為眼球前後徑過長或水晶體折光力太強，導致遠處物體的影像聚焦在視網膜的何處？", "options": {"A": "無法聚焦點", "B": "視網膜的後方", "C": "剛好在視網膜上", "D": "視網膜的前方"}, "answer": "D", "level": "基礎", "concept": "近視眼之成因（成像於視網膜前）", "explanation": "【解析】近視患者眼球屈光度過大，光線過早會聚，影像落在視網膜的「前方」，導致到達視網膜時已散開變模糊。【避坑提醒】「近視聚在前方，遠視落在後方」！"}, {"id": 181, "chapter": "4-4 透鏡成像", "question": "為了解決近視眼看遠處模糊的問題，患者應該配戴哪一種透鏡製成的眼鏡來加以矯正？", "options": {"A": "凹透鏡", "B": "凸透鏡", "C": "平面鏡", "D": "凸面鏡"}, "answer": "A", "level": "基礎", "concept": "近視眼鏡使用凹透鏡矯正", "explanation": "【解析】近視是因為光線聚得太早。配戴具有「發散作用」的凹透鏡，能先將光線稍微發散開來，再經水晶體會聚，恰好後移聚焦在視網膜上。【避坑提醒】近視戴凹透鏡（發散），老花/遠視戴凸透鏡（會聚）。"}, {"id": 182, "chapter": "4-4 透鏡成像", "question": "年長者常患有「老花眼」，看近處的報紙書本時字跡模糊不清。老花眼主要是因為水晶體調節能力減弱，影像落在視網膜後方，應配戴何種透鏡矯正？", "options": {"A": "凹透鏡", "B": "凸透鏡", "C": "凹面鏡", "D": "平面玻璃片"}, "answer": "B", "level": "基礎", "concept": "老花眼/遠視眼配戴凸透鏡矯正", "explanation": "【解析】老花眼與遠視眼因眼球屈光力不足，像落在視網膜後方。需配戴具有「會聚作用」的凸透鏡預先會聚光線，使焦點前移至視網膜上。【避坑提醒】長輩看報拿放大鏡或老花眼鏡，鏡片都是凸透鏡！"}, {"id": 183, "chapter": "4-4 透鏡成像", "question": "一條光線沿著主軸穿過透鏡正中央的「鏡心」，此光線折射後的傳播方向為何？", "options": {"A": "折向焦點", "B": "反射回原處", "C": "沿原直線前進，方向完全不變", "D": "垂直向上折射"}, "answer": "C", "level": "基礎", "concept": "過鏡心之光線方向不變", "explanation": "【解析】通過透鏡幾何中心（鏡心）的光線，兩側表面近似平行且厚度極薄，故穿過鏡心時傳播方向不發生偏折，沿原直線前進。【避坑提醒】透鏡成像作圖第一條必備光線：過鏡心不偏折！"}, {"id": 184, "chapter": "4-4 透鏡成像", "question": "在陽光下，拿一個凸透鏡對準太陽，並在下方放置一張黑紙。上下調整透鏡高度，可以在黑紙上找到一個最小、最明亮的光點，並將黑紙燒焦。此最小最亮的光點就是凸透鏡的什麼？", "options": {"A": "鏡心", "B": "虛像點", "C": "兩倍焦距點", "D": "焦點"}, "answer": "D", "level": "基礎", "concept": "測量凸透鏡焦距的太陽光聚光法", "explanation": "【解析】太陽光可視為平行光束，穿過凸透鏡後會聚的位置即為「焦點」，透鏡到該光點的垂直距離即為「焦距（f）」。【避坑提醒】聚光燒黑紙是測量凸透鏡焦距最經典的實作方法。"}, {"id": 185, "chapter": "4-4 透鏡成像", "question": "下列關於「實像」與「虛像」的根本區別，何者正確？", "options": {"A": "實像可以用紙屏或白布幕承接，虛像無法用紙屏承接", "B": "實像永遠是正立的，虛像永遠是倒立的", "C": "實像只能用照相機拍到，人眼看不見", "D": "虛像具有強大能量可以把紙燒焦"}, "answer": "A", "level": "基礎", "concept": "實像與虛像的定義與本質區別", "explanation": "【解析】實像是實際光線交會而成的像，能在紙屏或屏幕上顯現；虛像是反射或折射光線的反向延長線交會而成，光線未真正匯聚，無法用紙屏承接。【避坑提醒】口訣：「實像可承接必倒立，虛像不可接必正立」！"}, {"id": 186, "chapter": "4-4 透鏡成像", "question": "某凸透鏡的焦距為 10 公分。若將一根蠟燭放置在該凸透鏡前 15 公分處，則在透鏡另一側的紙屏上將會呈現何種影像？", "options": {"A": "倒立縮小的實像", "B": "倒立放大的實像", "C": "倒立等大的實像", "D": "正立放大的虛像"}, "answer": "B", "level": "中等", "concept": "凸透鏡物距數值對照成像性質判斷（f < u < 2f）", "explanation": "【解析】焦距 f = 10 公分，兩倍焦距 2f = 20 公分。蠟燭放置在 15 公分處，符合 f < u < 2f（一倍到兩倍焦距之間）。根據規律，此區間成「倒立、放大、實像」。【避坑提醒】先將題目給的 f 與 2f 標出來，判斷物距落在哪個區間即可秒殺！"}, {"id": 187, "chapter": "4-4 透鏡成像", "question": "在凸透鏡成像實驗中，紙屏上已經清晰呈現出一個倒立縮小的燭焰實像。此時如果用一張不透光的黑紙遮住凸透鏡的「上半部」，則紙屏上的像會有何變化？", "options": {"A": "像只剩下半截，上半截消失", "B": "像只剩下上半截，下半截消失", "C": "像依然完整，但亮度變暗", "D": "像完全消失看不見"}, "answer": "C", "level": "中等", "concept": "遮擋透鏡部分面積對成像完整性與亮度的影響", "explanation": "【解析】燭焰上的每一點發出的光線都射向整個透鏡表面。遮住上半部後，下半部透鏡依然接收每一點射來的光線並折射會聚成完整的像；但通過透鏡的光量減少一半，因此像「依然完整，但亮度變暗」。【避坑提醒】全台灣國二段考最常考的超級陷阱！遮一半「像不會缺一半，只會變暗」！"}, {"id": 188, "chapter": "4-4 透鏡成像", "question": "小明進行凸透鏡成像實驗，當物體由兩倍焦距外（u > 2f）「逐漸朝向焦點靠近」的移動過程中，紙屏上所成的實像大小與像距會有何變化？", "options": {"A": "像距變小，但像逐漸變大", "B": "像距變小，且像逐漸變小", "C": "像距變大，但像逐漸變小", "D": "像距變大，且像逐漸變大"}, "answer": "D", "level": "中等", "concept": "凸透鏡成像動態移動規律：物近像遠像變大", "explanation": "【解析】物體向焦點靠近時，折射光線散開的交會點往外後移，因此像距變大，且光線交會張角變大使得像的尺寸逐漸放大。【避坑提醒】黃金口訣：「物近、像遠、像變大」！"}, {"id": 189, "chapter": "4-4 透鏡成像", "question": "某凸透鏡焦距為 12 公分，若想在紙屏上得到一個與物體「大小完全相等」的倒立實像，物體與紙屏之間的總距離應該為多少公分？", "options": {"A": "48 公分", "B": "36 公分", "C": "24 公分", "D": "12 公分"}, "answer": "A", "level": "中等", "concept": "等大實像時物與屏最小總距離（4f）計算", "explanation": "【解析】成等大實像時，物距 u = 2f = 24 公分，像距 v = 2f = 24 公分。物體在透鏡一側，紙屏在透鏡另一側，兩者總距離 = u + v = 24 + 24 = 48 公分（即 4f，為實像的最小物屏距）。【避坑提醒】題目問的是「物體與紙屏間的總距離」，是 u + v = 4f，不要只回答 24 公分！"}, {"id": 190, "chapter": "4-4 透鏡成像", "question": "小華用放大鏡（凸透鏡）看報紙上的字，看到的是正立放大的字體。此時如果小華將放大鏡「慢慢遠離報紙」，越過焦點之後，小華透過放大鏡所看到的字體影像會突然發生何種改變？", "options": {"A": "字體變形為彩虹色", "B": "字體變成上下顛倒的像", "C": "字體變成原來的縮小正立像", "D": "字體完全消失永遠看不見"}, "answer": "B", "level": "中等", "concept": "物體越過焦點由虛像轉變為倒立實像之現象", "explanation": "【解析】物距在焦距內（u < f）時成「正立放大虛像」；當透鏡遠離報紙使物距大於焦距（u > f）時，成像性質轉變為「倒立實像」，因此眼睛會看見字體翻轉倒立。【避坑提醒】焦點是正立虛像與倒立實像的分水嶺！"}, {"id": 191, "chapter": "4-4 透鏡成像", "question": "甲、乙兩凸透鏡分別進行聚光實驗。甲透鏡直徑 10 公分、焦距 15 公分；乙透鏡直徑 5 公分、焦距 15 公分。若兩者皆正對太陽聚光，下列比較何者正確？", "options": {"A": "兩透鏡焦點處的光斑亮度完全相同", "B": "乙透鏡的焦距比甲透鏡長", "C": "甲透鏡焦點處的光點比乙透鏡明亮且能量更集中", "D": "乙透鏡無法聚光燒焦黑紙"}, "answer": "C", "level": "中等", "concept": "透鏡口徑面積決定聚光總量與亮度", "explanation": "【解析】兩透鏡焦距相同（皆為 15 cm），但甲透鏡直徑大（面積大），能接收並會聚更多的太陽光能量到焦點上，因此焦點光點更明亮、溫度更高。【避坑提醒】焦距決定成像位置，鏡面面積（口徑）決定亮度。"}, {"id": 192, "chapter": "4-4 透鏡成像", "question": "某位近視 400 度的同學摘下眼鏡，用手拿著眼鏡鏡片看遠處的風景，他透過鏡片所看到的景物影像特徵為何？", "options": {"A": "倒立縮小的實像", "B": "倒立放大的實像", "C": "正立放大的虛像", "D": "正立縮小的虛像"}, "answer": "D", "level": "中等", "concept": "近視眼鏡為凹透鏡，成像恆為正立縮小虛像", "explanation": "【解析】近視眼鏡的鏡片是「凹透鏡」。凹透鏡對任何距離的物體，永遠成「正立、縮小、虛像」。【避坑提醒】先判斷近視眼鏡＝凹透鏡，再套用凹透鏡唯一性質：正立縮小虛像！"}, {"id": 193, "chapter": "4-4 透鏡成像", "question": "小明在光具座上將蠟燭放在距離凸透鏡 30 公分處，在透鏡另一側 20 公分處的紙屏上得到清晰的燭焰像。若將蠟燭改移至距離透鏡 20 公分處，紙屏應該移動到距離透鏡多少公分處才能再度得到清晰的像？", "options": {"A": "30 公分", "B": "20 公分", "C": "10 公分", "D": "40 公分"}, "answer": "A", "level": "中等", "concept": "光路可逆原理在透鏡成像物距像距互換之應用", "explanation": "【解析】根據光路可逆原理：原本物距 u = 30 cm 時，像距 v = 20 cm；若將物體改放至 u = 20 cm 處，則折射光線必定會聚於 v = 30 cm 處。【避坑提醒】光路可逆性！物距與像距數值直接對調即可！"}, {"id": 194, "chapter": "4-4 透鏡成像", "question": "在凸透鏡成像實驗中，若想在紙屏上同時呈現出「放大」且「倒立」的燭焰實像，下列哪一組焦距 f 與物距 u 的組合符合要求？", "options": {"A": "f = 10 公分，u = 25 公分", "B": "f = 10 公分，u = 15 公分", "C": "f = 10 公分，u = 20 公分", "D": "f = 10 公分，u = 5 公分"}, "answer": "B", "level": "中等", "concept": "倒立放大實像之物距條件（f < u < 2f）數據判讀", "explanation": "【解析】倒立放大實像的條件為 f < u < 2f。當 f = 10 cm 時，物距 u 必須介於 10 cm 到 20 cm 之間，只有選項 C 的 15 cm 符合此區間。【避坑提醒】A (25cm) > 2f 成縮小實像；B (20cm) = 2f 等大；D (5cm) < f 成正立放大虛像（紙屏無法承接）。"}, {"id": 195, "chapter": "4-4 透鏡成像", "question": "關於複式顯微鏡的成像原理，下列敘述何者正確？", "options": {"A": "物鏡成倒立縮小實像，目鏡成正立放大實像", "B": "物鏡成正立放大虛像，目鏡成倒立縮小實像", "C": "物鏡成倒立放大實像，目鏡成正立放大虛像", "D": "物鏡與目鏡皆成縮小實像"}, "answer": "C", "level": "中等", "concept": "顯微鏡物鏡與目鏡之二次透鏡成像組合", "explanation": "【解析】複式顯微鏡由兩組凸透鏡組成。標本置於物鏡的 f ~ 2f 之間，經物鏡折射成「倒立放大實像」；此實像落在目鏡的焦距內，再經目鏡折射成「正立放大虛像」。最終人眼看到的是相對於原標本上下顛倒、左右相反的放大虛像。【避坑提醒】物鏡成倒立放大實像，目鏡當放大鏡用成虛像！"}, {"id": 196, "chapter": "4-4 透鏡成像", "question": "照相機拍攝遠處風景時，鏡頭到底片的距離大約等於多少？", "options": {"A": "小於一倍焦距（< f）", "B": "大於兩倍焦距（> 2f）", "C": "剛好等於兩倍焦距（2f）", "D": "略大於一倍焦距（稍大於 f）"}, "answer": "D", "level": "中等", "concept": "照相機像距與焦距的實際工程關係", "explanation": "【解析】照相機物距 u 極遠（u >> 2f），根據成像規律，像距 v 會落在 f 到 2f 之間，且越遠的物體像距越靠近焦點 f。因此相機內部鏡頭到底片/感光元件的距離通常「略大於一倍焦距 f」。【避坑提醒】像距在 f 到 2f 之間，離 f 很近，不可選小於 f。"}, {"id": 197, "chapter": "4-4 透鏡成像", "question": "某位同學戴著眼鏡看遠處時視線清晰，但他摘下眼鏡後，發現眼前的這副眼鏡放在白紙上竟然能像放大鏡一樣把報紙上的字體放大。請問這位同學患有何種視力問題？", "options": {"A": "遠視眼或老花眼", "B": "近視眼", "C": "散光眼", "D": "白內障"}, "answer": "A", "level": "中等", "concept": "由鏡片具有放大鏡功能（凸透鏡）反推遠視/老花", "explanation": "【解析】能把字體放大的透鏡必定是「凸透鏡」。配戴凸透鏡眼鏡者，是為了矯正成像在視網膜後方的問題，因此患有「遠視眼」或「老花眼」。【避坑提醒】近視鏡片（凹透鏡）只能把字縮小，絕不可能放大！"}, {"id": 198, "chapter": "4-4 透鏡成像", "question": "在凸透鏡成像中，當物體自無限遠處沿著主軸逐漸向兩倍焦距（2f）移動時，所成的倒立實像會有何變化？", "options": {"A": "像逐漸變小，且逐漸遠離透鏡", "B": "像逐漸變大，且逐漸遠離透鏡", "C": "像逐漸變大，但逐漸靠近透鏡", "D": "像的大小與位置均保持不變"}, "answer": "B", "level": "中等", "concept": "物距大於 2f 區間的動態成像演變", "explanation": "【解析】當物體在 2f 之外朝向 2f 靠近時（物體靠近透鏡），像距會由 f 處向外後移靠近 2f（像遠離透鏡），且像的尺寸由極小逐漸變大直到 2f 處與物體等大。【避坑提醒】依然遵守「物近像遠像變大」的基本動態法則！"}, {"id": 199, "chapter": "4-4 透鏡成像", "question": "用透明塑膠袋裝滿水綁緊，此時這個水袋相當於下列哪一種光學儀器？", "options": {"A": "平面鏡", "B": "凹透鏡", "C": "凸透鏡", "D": "凸面鏡"}, "answer": "C", "level": "中等", "concept": "生活常見物品形成凸透鏡模型", "explanation": "【解析】塑膠袋裝滿水後鼓起，形成中央厚、邊緣薄的透明球體，光線由空氣射入水再射出，對光線具有會聚作用，相當於一個凸透鏡（放大鏡）。【避坑提醒】水滴、裝水圓燒瓶、裝水塑膠袋皆屬於凸透鏡。"}, {"id": 200, "chapter": "4-4 透鏡成像", "question": "將一塊厚度均勻的透明平板玻璃置於物體與紙屏之間，紙屏上是否能像透鏡一樣承接到物體倒立或放大的實像？", "options": {"A": "可以，成正立放大實像", "B": "可以，成倒立等大實像", "C": "可以，成縮小實像", "D": "無法成像在紙屏上，因為平行平板玻璃不具會聚光線的能力"}, "answer": "D", "level": "中等", "concept": "平行平板玻璃與曲面透鏡之本質差異", "explanation": "【解析】平板玻璃兩側表面平行，光線穿過時僅產生平行側移，無法使平行光線產生向內彎折會聚於一點的效果，因此無法在紙屏上會聚成像。【避坑提醒】必須具備曲面厚度差（中央與邊緣厚度不同）才能發揮透鏡聚光或散光成像功能。"}, {"id": 201, "chapter": "4-5 色散與顏色", "question": "英國科學家牛頓利用三稜鏡將太陽白光分解成紅、橙、黃、綠、藍、靛、紫等多種彩色光，這種現象稱為什麼？", "options": {"A": "光的色散", "B": "光的折射", "C": "光的全反射", "D": "光的直線傳播"}, "answer": "A", "level": "基礎", "concept": "光的色散定義與牛頓三稜鏡實驗", "explanation": "【解析】白色陽光是由多種不同顏色的單色光混合而成的複色光。當白光通過三稜鏡時，各色光因偏折程度不同而分散展開的現象稱為「光的色散」。【避坑提醒】色散本質上是不同色光產生不同程度的折射所造成的結果。"}, {"id": 202, "chapter": "4-5 色散與顏色", "question": "在三稜鏡色散實驗中，太陽白光射入玻璃三稜鏡後，哪一種顏色的光偏折角度「最小」？", "options": {"A": "綠光", "B": "紅光", "C": "藍光", "D": "紫光"}, "answer": "B", "level": "基礎", "concept": "色散光譜中紅光偏折最小、紫光偏折最大", "explanation": "【解析】在玻璃介質中，紅光的傳播速率最快，折射時偏折角度最小；紫光傳播速率最慢，偏折角度最大。【避坑提醒】牢記口訣：「紅快偏折小，紫慢偏折大」！"}, {"id": 203, "chapter": "4-5 色散與顏色", "question": "光的三原色是指哪三種顏色的光？", "options": {"A": "紅、黃、藍", "B": "紅、白、黑", "C": "紅、綠、藍", "D": "黃、綠、紫"}, "answer": "C", "level": "基礎", "concept": "光的三原色（RGB）", "explanation": "【解析】光的三原色為「紅（Red）、綠（Green）、藍（Blue）」，簡稱 RGB。這三種色光按適當比例混合可調配出自然界中幾乎所有的色光。【避坑提醒】很多學生會誤選美術顏料的三原色（紅、黃、藍），光的三原色是「紅、綠、藍」！"}, {"id": 204, "chapter": "4-5 色散與顏色", "question": "將紅、綠、藍三種原色光以相同比例重疊投射在白牆上時，重疊的中央區域會呈現何種顏色？", "options": {"A": "黑色", "B": "黃色", "C": "紫色", "D": "白色"}, "answer": "D", "level": "基礎", "concept": "光的三原色等量混合為白光", "explanation": "【解析】光屬於加法混色，紅光、綠光、藍光等比例混合後會形成複合的「白光」。【避坑提醒】顏料混在一起越混越黑，色光混在一起越混越亮變成白光！"}, {"id": 205, "chapter": "4-5 色散與顏色", "question": "我們在陽光下看見一顆熟透的「紅蘋果」呈現鮮紅色，這是因為紅蘋果具有何種光學特性？", "options": {"A": "反射了紅光，吸收了其餘色光", "B": "吸收了紅光，反射了其餘色光", "C": "穿透了紅光，吸收了其餘色光", "D": "蘋果本身會自主發射紅光"}, "answer": "A", "level": "基礎", "concept": "不透明物體的顏色由反射的色光決定", "explanation": "【解析】不透明物體的顏色取決於其表面「反射」的色光。紅蘋果表面反射紅光進入人眼，而吸收了太陽光中的綠、藍等其他色光，因此呈現紅色。【避坑提醒】「看到什麼顏色就是反射什麼顏色」，其餘顏色被吸收！"}, {"id": 206, "chapter": "4-5 色散與顏色", "question": "一片「紅色透明玻璃紙」之所以看起來是紅色的，主要是因為它具有何種特性？", "options": {"A": "反射了所有的紅光", "B": "只允許紅光穿透，吸收了其餘色光", "C": "將穿透的所有色光全部轉變為紅光", "D": "製造出了紅色的新光線"}, "answer": "B", "level": "基礎", "concept": "透明物體的顏色由透過（穿透）的色光決定", "explanation": "【解析】透明物體的顏色取決於能「穿透（透射）」的色光。紅色玻璃紙只讓紅光穿透，其餘色光皆被吸收擋下，故呈現紅色。【避坑提醒】不透明看反射，透明看穿透！"}, {"id": 207, "chapter": "4-5 色散與顏色", "question": "一張在陽光下看起來是純白色的白紙，如果拿到只有「純藍色光」照射的暗室中，白紙看起來會呈現何種顏色？", "options": {"A": "白色", "B": "黑色", "C": "藍色", "D": "紅色"}, "answer": "C", "level": "基礎", "concept": "白色物體反射所有色光之照射特性", "explanation": "【解析】白色物體具反射所有照射色光的特性。當只有藍光照射時，白紙將藍光全數反射進入人眼，因此看起來呈現「藍色」。【避坑提醒】白紙照什麼光就呈現什麼顏色！"}, {"id": 208, "chapter": "4-5 色散與顏色", "question": "一件在白光下看起來是純黑色的衣服，在日光燈下、紅光下或綠光下觀察，它看起來永遠呈現黑色。這是因為黑色物體具有何種特性？", "options": {"A": "反射了所有的色光", "B": "只發射出黑色的光束", "C": "穿透了所有的光線", "D": "吸收了所有照射在它表面的可見光"}, "answer": "D", "level": "基礎", "concept": "黑色物體吸收所有可見光", "explanation": "【解析】黑色代表沒有任何可見光反射進入眼睛。黑色物體吸收所有照射到其表面的色光，幾乎不反射光線，因此在任何單色光照射下皆呈黑色。【避坑提醒】黑色＝吸收所有光，沒有「黑色的光線」存在。"}, {"id": 209, "chapter": "4-5 色散與顏色", "question": "大雨過後放晴時，背對太陽常能在天空中看見美麗的彩虹。彩虹的形成主要是太陽光在空氣中的微小水滴內發生了何種光學現象？", "options": {"A": "先折射進入水滴、在水滴內壁反射、再折射出水滴產生色散", "B": "只有反射", "C": "只有折射與色散", "D": "全反射"}, "answer": "A", "level": "基礎", "concept": "彩虹的光學路徑（兩次折射 + 一次內反射）", "explanation": "【解析】陽光射入空氣中小水滴時發生「折射（色散）」；抵達水滴後壁時發生「反射」；再度射出水滴時再次發生「折射」，使各色光分離擴大，形成外紅內紫的彩虹。【避坑提醒】彩虹是「兩次折射 + 一次反射」的色散結果！"}, {"id": 210, "chapter": "4-5 色散與顏色", "question": "觀察天空中自然形成的霓與虹時，通常主虹（虹）的外圈與內圈顏色排列為何？", "options": {"A": "外圈為紫色，內圈為紅色", "B": "外圈為紅色，內圈為紫色", "C": "外圈為黃色，內圈為綠色", "D": "外圈為白色，內圈為黑色"}, "answer": "B", "level": "基礎", "concept": "主虹顏色排列順序（外紅內紫）", "explanation": "【解析】主虹（虹）經過兩次折射與一次反射，紅光偏折角度較小（出射角度約 42° 較高），紫光偏折角度較大（出射角度約 40° 較低），故外圈呈現紅色、內圈呈現紫色。【避坑提醒】虹是「外紅內紫」，副虹（霓）則是「外紫內紅」。"}, {"id": 211, "chapter": "4-5 色散與顏色", "question": "在完全沒有其他光源的暗室中，有一面由「紅花」與「綠葉」組成的圖案。若此時只用一盞「純紅色的單色光」照射這面圖案，觀察者將會看到什麼景象？", "options": {"A": "紅花呈現紅色，綠葉呈現綠色", "B": "紅花呈現黑色，綠葉呈現紅色", "C": "紅花呈現紅色，綠葉呈現黑色", "D": "整面圖案全部變成黑色"}, "answer": "C", "level": "中等", "concept": "單色光照射下不透明物體吸收與反射綜合判別", "explanation": "【解析】紅光照射時，紅花反射紅光，故呈現「紅色」；綠葉只反射綠光而會吸收紅光，此時沒有綠光可反射，紅光又被全數吸收，沒有光線進入人眼，故綠葉呈現「黑色」。【避坑提醒】段考高頻題！綠葉在紅光下「絕對不會發綠光」，而是呈黑色！"}, {"id": 212, "chapter": "4-5 色散與顏色", "question": "舞台表演時，舞者身穿「藍色上衣」配「白色長褲」。當舞台燈光切換為「純黃色光（由紅光與綠光混合而成）」照射舞者時，觀眾看到的舞者衣著顏色為何？", "options": {"A": "藍色上衣、白色長褲", "B": "黑色上衣、白色長褲", "C": "黃色上衣、黑色長褲", "D": "黑色上衣、黃色長褲"}, "answer": "D", "level": "中等", "concept": "複合黃光照射藍衣與白褲之色彩視覺判斷", "explanation": "【解析】黃光為紅光加綠光。藍色上衣只反射藍光，會吸收紅光與綠光，故上衣反射不出光線呈「黑色」；白色長褲能反射所有色光，照射黃光便反射黃光呈「黃色」。【避坑提醒】白褲照黃光變黃色，藍衣無藍光可反變黑色！"}, {"id": 213, "chapter": "4-5 色散與顏色", "question": "在暗室中，將一片「紅色透明玻璃紙」與一片「綠色透明玻璃紙」重疊在一起。此時將一束強烈的白光手電筒透過這兩張玻璃紙照射，在後方白牆上將會看見何種顏色的光斑？", "options": {"A": "幾乎沒有光線透出，呈現黑色（暗斑）", "B": "白色光斑", "C": "黃色光斑", "D": "藍色光斑"}, "answer": "A", "level": "中等", "concept": "互補色透明濾光片重疊吸收效應", "explanation": "【解析】白光穿過紅色玻璃紙時，只有紅光穿透，其餘色光被吸收；紅光接著射入綠色玻璃紙，綠色玻璃紙只允許綠光穿透而會吸收紅光，因此紅光被綠紙全數吸收，最終沒有光線穿出，牆上呈黑色。【避坑提醒】紅濾鏡加綠濾鏡不是加法混色（不會變黃光）！是減法吸收，全黑！"}, {"id": 214, "chapter": "4-5 色散與顏色", "question": "關於白光通過玻璃三稜鏡發生色散的成因，下列微觀物理量的比較何者正確？", "options": {"A": "紅光在玻璃中的傳播速率小於紫光在玻璃中的傳播速率", "B": "紅光在玻璃中的傳播速率大於紫光在玻璃中的傳播速率", "C": "紅光與紫光在玻璃中的波速完全相同，只是振幅不同", "D": "紅光與紫光在真空中的波速不同"}, "answer": "B", "level": "中等", "concept": "色散之深層物理機理：不同頻率色光在介質中波速不同", "explanation": "【解析】在真空中所有色光速度皆相同（c ≈ 3×10^8 m/s）。但進入玻璃等介質後，頻率較低的紅光與玻璃分子相互作用較小，傳播速率較快；紫光頻率高傳播速率慢，故波速：紅 ＞ 綠 ＞ 紫。速度差異導致偏折程度不同而分散。【避坑提醒】在玻璃中「紅光跑得比紫光快」！"}, {"id": 215, "chapter": "4-5 色散與顏色", "question": "小明戴著一副「藍色鏡片」的太陽眼鏡看戶外景物。當他看一朵「黃色小花（反射紅光與綠光）」時，透過眼鏡看到的黃花顏色為何？", "options": {"A": "黃色", "B": "藍色", "C": "黑色", "D": "綠色"}, "answer": "C", "level": "中等", "concept": "彩色鏡片濾光效果之生活情境推演", "explanation": "【解析】黃花反射的是紅光與綠光的混合光，並不反射藍光。藍色鏡片只允許藍光穿透，會將紅光與綠光全數吸收擋下，因此沒有任何光線能穿透鏡片進入小明眼睛，看到的黃花呈「黑色」。【避坑提醒】黃花反射紅+綠，戴藍眼鏡把紅綠全擋掉，看起來就是黑色！"}, {"id": 216, "chapter": "4-5 色散與顏色", "question": "彩色電視機或電腦液晶螢幕的畫面上能呈現出千變萬化的豐富色彩，如果用高倍放大鏡仔細觀察螢幕表面，會發現螢幕是由哪三種微小的發光子畫素點組成的？", "options": {"A": "紅、黃、藍", "B": "青、品紅、黃", "C": "紅、白、黑", "D": "紅、綠、藍"}, "answer": "D", "level": "中等", "concept": "顯示器像素原理為光的三原色（RGB）加法混色", "explanation": "【解析】所有彩色顯示螢幕皆利用「光的三原色加法混色」原理，螢幕表面排列著無數個緊鄰的「紅（R）、綠（G）、藍（B）」發光微單元，藉由調節三者亮度比例混合出各種色彩。【避坑提醒】科技應用常識題，顯示器畫素必為 RGB。"}, {"id": 217, "chapter": "4-5 色散與顏色", "question": "若將雷射筆發出的「紅色單色光」射入玻璃三稜鏡中，當光線從三稜鏡射出時，會在白紙屏上觀察到何種現象？", "options": {"A": "依然只有一條偏折後的紅光光斑，不會發生色散", "B": "色散成彩虹般的七彩光帶", "C": "分裂成綠光與藍光", "D": "轉變為純白光"}, "answer": "A", "level": "中等", "concept": "單色光不會發生色散", "explanation": "【解析】雷射光為純粹的「單色光（單一波長）」，不包含其他顏色的光成分。穿過三稜鏡時只會發生正常的折射偏折，絕對不會色散展開成其他顏色。【避坑提醒】只有「複色光（如白光）」才會色散，單色光不會色散！"}, {"id": 218, "chapter": "4-5 色散與顏色", "question": "小華用手機拍攝一張照片，照片中有一張藍色桌面放著一個綠色西瓜。若小華在純紅光的暗室中觀賞這張「沖洗出來的實體彩色照片」，他看到的桌面與西瓜分別呈何種顏色？", "options": {"A": "桌面呈藍色，西瓜呈綠色", "B": "桌面呈黑色，西瓜呈黑色", "C": "桌面呈紅色，西瓜呈綠色", "D": "桌面呈紅色，西瓜呈紅色"}, "answer": "B", "level": "中等", "concept": "沖洗照片顏料在單色光照射下的吸收", "explanation": "【解析】實體照片是顏料印刷品。照片中的藍色桌面油墨只反射藍光，綠色西瓜油墨只反射綠光。在純紅光照射下，兩者皆無法反射紅光而將紅光吸收，故皆呈現「黑色」。【避坑提醒】實體照片看的是顏料反射，缺相對應色光皆呈黑色。"}, {"id": 219, "chapter": "4-5 色散與顏色", "question": "夏天在烈日下運動時，穿著「白色」衣服通常比穿著「黑色」衣服感覺較為涼爽，其主要科學原因為何？", "options": {"A": "白色衣服會主動發射冷氣降溫", "B": "黑色衣服透氣性天生比白色好", "C": "白色衣服反射了大部分的太陽光，吸收的輻射熱較少", "D": "白色布料的密度比黑色布料低很多"}, "answer": "C", "level": "中等", "concept": "光吸收與熱量吸收的生活應用跨科連結", "explanation": "【解析】白色物體能反射幾乎所有的可見光，吸收的光能量極少；黑色物體會吸收所有可見光並將光能轉化為熱能，使溫度迅速上升。【避坑提醒】白衣反光吸熱少涼爽，黑衣吸光吸熱多悶熱。"}, {"id": 220, "chapter": "4-5 色散與顏色", "question": "當一束白光通過充有紅色氣體的玻璃管時，射出的光束呈現紅色。這是因為該紅色氣體發生了何種作用？", "options": {"A": "氣體產生了化學發光反應", "B": "將白光中的綠光與藍光轉化為紅光", "C": "只反射紅光，其餘色光全部穿透", "D": "吸收了紅光以外的所有其他色光"}, "answer": "D", "level": "中等", "concept": "透明介質選擇性吸收之本質", "explanation": "【解析】透明介質（包括有色氣體、液體、玻璃）呈現某種顏色，本質就是該介質選擇性「吸收」了其他波長的光，只讓特定波長的色光（此處為紅光）穿透。【避坑提醒】「透紅光」必然意味著「吸收其他色光」。"}];
+
+    // Storage Keys
+    const KEY_WRONG = 'g8_sci_wrong_ids_v1';
+    const KEY_MASTERED = 'g8_sci_mastered_ids_v1';
+
+    let wrongIds = new Set(JSON.parse(localStorage.getItem(KEY_WRONG) || '[]'));
+    let masteredIds = new Set(JSON.parse(localStorage.getItem(KEY_MASTERED) || '[]'));
+
+    // App State
+    let selectedMode = 'practice'; // 'practice' | 'exam' | 'wrong'
+    let selectedChapters = new Set();
+    let selectedLevel = 'ALL';
+    let selectedCount = 25;
+
+    let currentQuiz = [];
+    let currentIndex = 0;
+    let userAnswers = {}; // index -> chosenOptionObj
+    let timerInterval = null;
+    let secondsElapsed = 0;
+
+    // Extract unique chapters in order
+    const ALL_CHAPTERS = [...new Set(ALL_QUESTIONS.map(q => q.chapter))];
+    ALL_CHAPTERS.forEach(c => selectedChapters.add(c));
+
+    function saveStorage() {
+      localStorage.setItem(KEY_WRONG, JSON.stringify([...wrongIds]));
+      localStorage.setItem(KEY_MASTERED, JSON.stringify([...masteredIds]));
+      updateStatsUI();
+    }
+
+    function updateStatsUI() {
+      document.getElementById('statTotal').textContent = ALL_QUESTIONS.length;
+      document.getElementById('statMastered').textContent = masteredIds.size;
+      document.getElementById('statWrong').textContent = wrongIds.size;
+
+      const badge = document.getElementById('headerWrongCount');
+      badge.textContent = wrongIds.size;
+      if (wrongIds.size === 0) {
+        badge.classList.add('zero');
+      } else {
+        badge.classList.remove('zero');
+      }
+      updateMatchedCount();
+    }
+
+    function renderChapterGrid() {
+      const grid = document.getElementById('chapterGrid');
+      grid.innerHTML = '';
+      ALL_CHAPTERS.forEach(chap => {
+        const count = ALL_QUESTIONS.filter(q => q.chapter === chap).length;
+        const div = document.createElement('div');
+        div.className = 'chap-pill' + (selectedChapters.has(chap) ? ' selected' : '');
+        div.innerHTML = `<span>${chap}</span><span class="chap-count">${count}題</span>`;
+        div.onclick = () => {
+          if (selectedChapters.has(chap)) {
+            selectedChapters.delete(chap);
+          } else {
+            selectedChapters.add(chap);
+          }
+          renderChapterGrid();
+          updateMatchedCount();
+        };
+        grid.appendChild(div);
+      });
+    }
+
+    function toggleAllChapters(selectAll) {
+      if (selectAll) {
+        ALL_CHAPTERS.forEach(c => selectedChapters.add(c));
+      } else {
+        selectedChapters.clear();
+      }
+      renderChapterGrid();
+      updateMatchedCount();
+    }
+
+    function selectCh3() {
+      selectedChapters.clear();
+      ALL_CHAPTERS.filter(c => c.startsWith('3-')).forEach(c => selectedChapters.add(c));
+      renderChapterGrid();
+      updateMatchedCount();
+    }
+
+    function selectCh4() {
+      selectedChapters.clear();
+      ALL_CHAPTERS.filter(c => c.startsWith('4-')).forEach(c => selectedChapters.add(c));
+      renderChapterGrid();
+      updateMatchedCount();
+    }
+
+    function selectMode(mode) {
+      selectedMode = mode;
+      document.querySelectorAll('.mode-card').forEach(el => {
+        el.classList.toggle('active', el.dataset.mode === mode);
+      });
+      const normalFilters = document.getElementById('normalFilters');
+      if (mode === 'wrong') {
+        normalFilters.classList.add('hidden');
+      } else {
+        normalFilters.classList.remove('hidden');
+      }
+      updateMatchedCount();
+    }
+
+    function setSeg(type, val, btn) {
+      const parent = btn.parentElement;
+      parent.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (type === 'level') selectedLevel = val;
+      if (type === 'count') selectedCount = Number(val);
+      updateMatchedCount();
+    }
+
+    function getFilteredPool() {
+      if (selectedMode === 'wrong') {
+        return ALL_QUESTIONS.filter(q => wrongIds.has(q.id));
+      }
+      return ALL_QUESTIONS.filter(q => {
+        const chapOk = selectedChapters.has(q.chapter);
+        const levelOk = selectedLevel === 'ALL' || q.level === selectedLevel;
+        return chapOk && levelOk;
+      });
+    }
+
+    function updateMatchedCount() {
+      const pool = getFilteredPool();
+      document.getElementById('matchedCount').textContent = pool.length;
+    }
+
+    function shuffleArray(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function startWrongBook() {
+      if (wrongIds.size === 0) {
+        alert('太棒了！目前錯題本是空的，沒有待複習的錯題喔！');
+        return;
+      }
+      selectMode('wrong');
+      startQuiz();
+    }
+
+    function startQuiz() {
+      const pool = getFilteredPool();
+      if (pool.length === 0) {
+        if (selectedMode === 'wrong') {
+          alert('目前錯題本沒有題目！請先選擇「自由刷題模式」或「段考模擬測驗」進行練習。');
+        } else {
+          alert('請至少勾選一個章節！');
+        }
+        return;
+      }
+
+      const limit = selectedMode === 'wrong' ? pool.length : Math.min(selectedCount, pool.length);
+      const picked = shuffleArray(pool).slice(0, limit);
+
+      // Prepare each question with shuffled options
+      currentQuiz = picked.map(q => {
+        const keys = ['A', 'B', 'C', 'D'];
+        const rawOpts = keys.map(k => ({
+          origKey: k,
+          text: q.options[k],
+          isCorrect: k === q.answer
+        }));
+        const shuffledOpts = shuffleArray(rawOpts);
+        const displayLabels = ['A', 'B', 'C', 'D'];
+        const finalOpts = shuffledOpts.map((o, idx) => ({
+          ...o,
+          displayKey: displayLabels[idx]
+        }));
+        return {
+          ...q,
+          shuffledOptions: finalOpts
+        };
+      });
+
+      currentIndex = 0;
+      userAnswers = {};
+      secondsElapsed = 0;
+
+      document.getElementById('setupView').classList.add('hidden');
+      document.getElementById('resultView').classList.add('hidden');
+      document.getElementById('quizView').classList.remove('hidden');
+
+      // Timer setup
+      clearInterval(timerInterval);
+      const timerPill = document.getElementById('timerPill');
+      if (selectedMode === 'exam') {
+        timerPill.classList.remove('hidden');
+        timerPill.textContent = '00:00';
+        timerInterval = setInterval(() => {
+          secondsElapsed++;
+          timerPill.textContent = formatTime(secondsElapsed);
+        }, 1000);
+      } else {
+        timerPill.classList.add('hidden');
+      }
+
+      renderQuestion();
+    }
+
+    function formatTime(sec) {
+      const m = String(Math.floor(sec / 60)).padStart(2, '0');
+      const s = String(sec % 60).padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function parseExplanation(raw) {
+      // Split 【解析】 and 【避坑提醒】
+      let detail = raw;
+      let pitfall = '';
+      if (raw.includes('【避坑提醒】')) {
+        const parts = raw.split('【避坑提醒】');
+        detail = parts[0].replace('【解析】', '').trim();
+        pitfall = parts[1].trim();
+      } else {
+        detail = raw.replace('【解析】', '').trim();
+      }
+      return { detail, pitfall };
+    }
+
+    function renderQuestion() {
+      const q = currentQuiz[currentIndex];
+      const total = currentQuiz.length;
+
+      document.getElementById('progressText').textContent = `${currentIndex + 1} / ${total}`;
+      document.getElementById('progressFill').style.width = `${((currentIndex + 1) / total) * 100}%`;
+
+      document.getElementById('qChapter').textContent = q.chapter;
+      const levelEl = document.getElementById('qLevel');
+      levelEl.textContent = q.level;
+      levelEl.className = 'tag ' + (q.level === '基礎' ? 'tag-level-basic' : 'tag-level-mid');
+      document.getElementById('qId').textContent = `題號 #${q.id}`;
+      document.getElementById('qText').textContent = q.question;
+
+      const optsList = document.getElementById('optionsList');
+      optsList.innerHTML = '';
+
+      const chosen = userAnswers[currentIndex];
+      const isImmediate = selectedMode !== 'exam';
+
+      q.shuffledOptions.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+
+        if (chosen) {
+          if (isImmediate) {
+            btn.disabled = true;
+            if (opt.isCorrect) {
+              btn.classList.add('correct');
+            } else if (chosen.displayKey === opt.displayKey && !opt.isCorrect) {
+              btn.classList.add('wrong');
+            }
+          } else {
+            if (chosen.displayKey === opt.displayKey) {
+              btn.classList.add('selected');
+            }
+          }
+        }
+
+        btn.innerHTML = `
+          <span class="opt-key">${opt.displayKey}</span>
+          <span>${opt.text}</span>
+        `;
+
+        btn.onclick = () => handleSelectOption(opt);
+        optsList.appendChild(btn);
+      });
+
+      // Explanation box
+      const expBox = document.getElementById('expBox');
+      if (chosen && isImmediate) {
+        expBox.classList.remove('hidden');
+        const expHeader = document.getElementById('expHeader');
+        const correctOpt = q.shuffledOptions.find(o => o.isCorrect);
+        if (chosen.isCorrect) {
+          expHeader.className = 'exp-header is-correct';
+          expHeader.innerHTML = `<span>✅ 答對了！觀念非常清晰</span><span>正確選項：(${correctOpt.displayKey})</span>`;
+        } else {
+          expHeader.className = 'exp-header is-wrong';
+          expHeader.innerHTML = `<span>❌ 答錯囉！已自動收入錯題本</span><span>正確選項：(${correctOpt.displayKey})</span>`;
+        }
+
+        document.getElementById('expConcept').textContent = q.concept;
+        const parsed = parseExplanation(q.explanation);
+        document.getElementById('expDetail').textContent = parsed.detail;
+
+        const pitfallBox = document.getElementById('pitfallBox');
+        if (parsed.pitfall) {
+          pitfallBox.classList.remove('hidden');
+          document.getElementById('expPitfall').textContent = parsed.pitfall;
+        } else {
+          pitfallBox.classList.add('hidden');
+        }
+      } else {
+        expBox.classList.add('hidden');
+      }
+
+      // Nav buttons
+      document.getElementById('prevBtn').disabled = currentIndex === 0;
+      const nextBtn = document.getElementById('nextBtn');
+      if (currentIndex === total - 1) {
+        nextBtn.textContent = selectedMode === 'exam' ? '📊 交卷看成績' : '🏁 完成本次練習';
+      } else {
+        nextBtn.textContent = '下一題 →';
+      }
+    }
+
+    function handleSelectOption(opt) {
+      const q = currentQuiz[currentIndex];
+      userAnswers[currentIndex] = opt;
+
+      // Update mastery & wrong book immediately in practice/wrong modes
+      if (selectedMode !== 'exam') {
+        if (opt.isCorrect) {
+          masteredIds.add(q.id);
+          if (wrongIds.has(q.id)) {
+            wrongIds.delete(q.id);
+          }
+        } else {
+          wrongIds.add(q.id);
+        }
+        saveStorage();
+      }
+
+      renderQuestion();
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    function nextQuestion() {
+      if (selectedMode === 'exam' && !userAnswers[currentIndex]) {
+        // Allow skipping or remind? Let's gently allow moving forward
+      }
+      if (currentIndex < currentQuiz.length - 1) {
+        currentIndex++;
+        renderQuestion();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      if (selectedMode === 'exam') {
+        const unanswered = currentQuiz.length - Object.keys(userAnswers).length;
+        if (unanswered > 0) {
+          if (!confirm(`還有 ${unanswered} 題尚未作答，確定要直接交卷嗎？`)) {
+            return;
+          }
+        }
+      }
+
+      clearInterval(timerInterval);
+
+      // Grade and update storage
+      let correctCount = 0;
+      const chapStats = {};
+
+      currentQuiz.forEach((q, idx) => {
+        if (!chapStats[q.chapter]) {
+          chapStats[q.chapter] = { total: 0, correct: 0 };
+        }
+        chapStats[q.chapter].total++;
+
+        const chosen = userAnswers[idx];
+        const isRight = chosen && chosen.isCorrect;
+
+        if (isRight) {
+          correctCount++;
+          chapStats[q.chapter].correct++;
+          masteredIds.add(q.id);
+          if (wrongIds.has(q.id)) {
+            wrongIds.delete(q.id);
+          }
+        } else {
+          wrongIds.add(q.id);
+        }
+      });
+
+      saveStorage();
+
+      // Render Result View
+      document.getElementById('quizView').classList.add('hidden');
+      document.getElementById('resultView').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const score = Math.round((correctCount / currentQuiz.length) * 100);
+      document.getElementById('resScore').textContent = `${score} 分`;
+
+      let timeStr = selectedMode === 'exam' ? `｜耗時 ${formatTime(secondsElapsed)}` : '';
+      document.getElementById('resSummary').textContent = `共 ${currentQuiz.length} 題，答對 ${correctCount} 題${timeStr}`;
+
+      // Chapter breakdown
+      const bdContainer = document.getElementById('chapBreakdown');
+      bdContainer.innerHTML = '';
+      Object.entries(chapStats).forEach(([chap, st]) => {
+        const pct = Math.round((st.correct / st.total) * 100);
+        const barColor = pct >= 80 ? '#10b981' : (pct >= 60 ? '#f59e0b' : '#ef4444');
+        const item = document.createElement('div');
+        item.className = 'chap-breakdown-item';
+        item.innerHTML = `
+          <div class="chap-bd-top">
+            <span>${chap}</span>
+            <span>${st.correct} / ${st.total} 題 (${pct}%)</span>
+          </div>
+          <div class="chap-bd-bar">
+            <div class="chap-bd-fill" style="width:${pct}%; background:${barColor};"></div>
+          </div>
+        `;
+        bdContainer.appendChild(item);
+      });
+
+      // Review List
+      const reviewList = document.getElementById('reviewList');
+      reviewList.innerHTML = '';
+      currentQuiz.forEach((q, idx) => {
+        const chosen = userAnswers[idx];
+        const isRight = chosen && chosen.isCorrect;
+        const correctOpt = q.shuffledOptions.find(o => o.isCorrect);
+        const parsed = parseExplanation(q.explanation);
+
+        const div = document.createElement('div');
+        div.className = 'review-item' + (isRight ? '' : ' wrong-card');
+        div.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+            <span class="tag tag-chap">${q.chapter} · #${q.id}</span>
+            <span style="font-weight:800; font-size:0.88rem; color:${isRight ? '#10b981' : '#ef4444'};">
+              ${isRight ? '✅ 答對' : (chosen ? `❌ 你的答案：(${chosen.displayKey}) ${chosen.text}` : '⚪ 未作答')}
+            </span>
+          </div>
+          <div style="font-weight:700; margin-bottom:8px; color:#0f172a;">${idx + 1}. ${q.question}</div>
+          <div style="font-size:0.9rem; font-weight:700; color:#065f46; background:#ecfdf5; padding:8px 12px; border-radius:8px; margin-bottom:10px;">
+            正確答案：(${correctOpt.displayKey}) ${correctOpt.text}
+          </div>
+          <div class="concept-chip">🎯 核心考點：${q.concept}</div>
+          <div style="font-size:0.9rem; color:#334155; margin-bottom:8px;">${parsed.detail}</div>
+          ${parsed.pitfall ? `<div class="pitfall-box"><span class="pitfall-title">⚠️ 段考避坑提醒</span>${parsed.pitfall}</div>` : ''}
+        `;
+        reviewList.appendChild(div);
+      });
+    }
+
+    function confirmExit() {
+      if (confirm('確定要結束目前測驗並返回主選單嗎？')) {
+        goHome();
+      }
+    }
+
+    function goHome() {
+      clearInterval(timerInterval);
+      document.getElementById('quizView').classList.add('hidden');
+      document.getElementById('resultView').classList.add('hidden');
+      document.getElementById('setupView').classList.remove('hidden');
+      if (selectedMode === 'wrong' && wrongIds.size === 0) {
+        selectMode('practice');
+      }
+      updateStatsUI();
+    }
+
+    function resetProgress() {
+      if (confirm('確定要清空所有「已答對紀錄」與「錯題本」嗎？此動作無法復原。')) {
+        wrongIds.clear();
+        masteredIds.clear();
+        saveStorage();
+        alert('學習紀錄已全部重置！');
+      }
+    }
+
+    // Init
+    renderChapterGrid();
+    updateStatsUI();
+  </script>
+</body>
+</html>
